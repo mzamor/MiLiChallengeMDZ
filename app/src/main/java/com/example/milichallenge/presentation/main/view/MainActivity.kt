@@ -18,7 +18,7 @@ class MainActivity:MainContract.MainView, AppCompatActivity() {
         presenter = MainPresenter()
         presenter.attachView(this)
 
-        val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl("https://api.mercadolibre.com/sites/MLA/")
+        val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl("https://api.mercadolibre.com/sites/MLA/").build()
 
     }
 
