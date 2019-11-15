@@ -7,6 +7,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface SearchServices {
-    @GET("/search")
-    fun getSearchProducts(@Query("q") productSearch: String): Call<ResultSearch>
+    @GET("{site}/search")
+    fun getSearchProducts(@Path("site") site: String, @Query("q") productSearch: String): Call<ResultSearch>
 }
