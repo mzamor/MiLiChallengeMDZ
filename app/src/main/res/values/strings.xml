@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MiliChallenge</string>
+    <string name="title_search_in_ml">Buscar en Mercado Libre</string>
 </resources>
