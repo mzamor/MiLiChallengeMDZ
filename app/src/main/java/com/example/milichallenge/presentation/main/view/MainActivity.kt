@@ -6,8 +6,10 @@ import android.util.Log
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.milachallenge.presentation.main.MainContract
+import com.example.milachallenge.presentation.main.adapter.model.ResultSearch
 import com.example.milachallenge.presentation.main.presenter.MainPresenter
 import com.example.milichallenge.R
 
@@ -15,8 +17,7 @@ class MainActivity : MainContract.MainView, AppCompatActivity(),  SearchView.OnQ
     lateinit var presenter: MainPresenter
     private var rvProducts: RecyclerView? = null
     private var svProductsMenu: SearchView? = null
-
-
+    private val productAdapter:ProductsAdapter by lazy { ProductsAdapter(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +30,13 @@ class MainActivity : MainContract.MainView, AppCompatActivity(),  SearchView.OnQ
     override fun navigateToItemDetails() {
     }
 
+    override fun showProductList(resultSearch: ResultSearch) {
+        Log.e("resultadoRecycler",resultSearch.results.size.toString())
+        rvProducts?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+        rvProducts?.adapter = productAdapter
+        productAdapter.add(resultSearch.results)
+    }
+
     override fun onQueryTextSubmit(query: String?): Boolean {
         Log.e("query",query)
         presenter.queryProducts("MLA",query!!)
@@ -37,7 +45,7 @@ class MainActivity : MainContract.MainView, AppCompatActivity(),  SearchView.OnQ
 
     override fun onQueryTextChange(newText: String?): Boolean {
         Log.e("newText",newText)
-        presenter.queryProducts("MLA",newText!!)
+     //   presenter.queryProducts("MLA",newText!!)
         return false    }
 
 

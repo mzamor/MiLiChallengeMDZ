@@ -21,6 +21,8 @@ class MainPresenter : MainContract.MainPresenter {
         call.enqueue(object: Callback<ResultSearch> {
             override fun onResponse(call: Call<ResultSearch>, response: Response<ResultSearch>) {
                 Log.e("response", response.body().toString())
+                val resultSearch:ResultSearch  = response.body()!!
+                view?.showProductList(resultSearch)
             }
             override fun onFailure(call: Call<ResultSearch>, t: Throwable) {
             }
