@@ -7,16 +7,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.milachallenge.presentation.main.adapter.model.Product
 import com.example.milichallenge.R
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_product_list.view.*
 
-class ProductsAdapter(private val context: Context) : RecyclerView.Adapter<ProductsAdapter.ProductsHolder>() {
-    private var productsList:List<Product>
+class ProductsAdapter(private val context: Context, var listener: ClickListener) :
+    RecyclerView.Adapter<ProductsAdapter.ProductsHolder>() {
+    var productsList: List<Product>
 
-    init{
-        productsList = emptyList<Product>()
+    init {
+        productsList = emptyList()
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductsHolder {
-        return ProductsHolder(LayoutInflater.from(context).inflate(R.layout.item_product_list,parent,false))
+        return ProductsHolder(
+            LayoutInflater.from(context).inflate(
+                R.layout.item_product_list,
+                parent,
+                false
+            ), listener
+        )
     }
 
     override fun getItemCount(): Int {
@@ -24,19 +33,30 @@ class ProductsAdapter(private val context: Context) : RecyclerView.Adapter<Produ
     }
 
     override fun onBindViewHolder(holder: ProductsHolder, position: Int) {
-        holder.bind(productsList[position])
+        holder.bind(productsList[position], listener)
     }
 
-    fun add(productList:List<Product>){
-            productsList = productList
-            notifyDataSetChanged()
+    fun add(productList: List<Product>) {
+        productsList = productList
+        notifyDataSetChanged()
     }
 
-    class ProductsHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
-        fun bind(product: Product) {
-            itemView.tv_title.text = product.title
-            itemView.tv_price.text = product.price.toString()
+    class ProductsHolder(itemView: View, listener: ClickListener) :
+        RecyclerView.ViewHolder(itemView) {
+        var listener: ClickListener? = null
+
+        init {
+            this.listener = listener
         }
 
+        fun bind(product: Product, listener: ClickListener) {
+            Picasso.get().load(product.thumbnail).into(itemView.iv_product)
+            itemView.tv_title.text = product.title
+            itemView.tv_price.text = product.price.toString()
+            itemView.setOnClickListener(View.OnClickListener {
+                listener.onClick(it, product)
+            })
+
+        }
     }
 }

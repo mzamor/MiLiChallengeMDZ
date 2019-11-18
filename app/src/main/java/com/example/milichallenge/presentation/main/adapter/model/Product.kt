@@ -1,6 +1,8 @@
 package com.example.milachallenge.presentation.main.adapter.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Product(
     @SerializedName("site_id")
@@ -31,5 +33,5 @@ data class Product(
     val sellerAddress: Address,
     @SerializedName("attributes")
     val attributes: List<Attribute>
-)
+):Serializable
 
