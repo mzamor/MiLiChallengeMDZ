@@ -5,5 +5,7 @@
     <string name="price">$ %s</string>
     <string name="free_shipping">Envío gratis</string>
     <string name="installments">Hasta %s cuotas sin interés</string>
-
+    <string name="new_product">Nuevo</string>
+    <string name="sold_quantity">%s vendidos</string>
+    <string name="bar_separator">%s1 | %s2</string>
 </resources>

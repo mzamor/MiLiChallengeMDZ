@@ -2,35 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="@dimen/margin_x20">
-<TextView
-    android:id="@+id/tv_title_product_detail"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/margin_x20"/>
+
+    <TextView
+        android:id="@+id/tv_sold_products"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_x20" />
+
+    <TextView
+        android:id="@+id/tv_title_product_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_x20" />
 
     <TextView
         android:id="@+id/tv_price_product_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_x20"/>
+        android:layout_marginBottom="@dimen/margin_x20" />
 
     <TextView
         android:id="@+id/tv_title_product_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_x20"
-        android:text="@string/product_info"/>
+        android:text="@string/product_info" />
 
     <ListView
         android:id="@+id/lv_product_info"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="hola"/>
+        android:text="hola" />
 </LinearLayout>
