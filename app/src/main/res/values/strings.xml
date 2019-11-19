@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">MiliChallenge</string>
     <string name="title_search_in_ml">Buscar en Mercado Libre</string>
+    <string name="product_info">Información del producto</string>
+    <string name="price">$ %s1</string>
+
 </resources>

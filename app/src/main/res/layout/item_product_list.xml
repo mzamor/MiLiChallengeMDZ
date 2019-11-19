@@ -7,24 +7,26 @@
 
     <ImageView
         android:id="@+id/iv_product"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="@dimen/margin_x50"
+        android:layout_height="@dimen/margin_x50"
+        android:layout_margin="@dimen/margin_x10"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_x10"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack" />
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tv_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack" />
+            android:textColor="@color/black" />
     </LinearLayout>
 </LinearLayout>

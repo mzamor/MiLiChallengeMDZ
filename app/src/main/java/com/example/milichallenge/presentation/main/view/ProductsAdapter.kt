@@ -13,9 +13,10 @@ import kotlinx.android.synthetic.main.item_product_list.view.*
 class ProductsAdapter(private val context: Context, var listener: ClickListener) :
     RecyclerView.Adapter<ProductsAdapter.ProductsHolder>() {
     var productsList: List<Product>
-
+    var myContext : Context?=null
     init {
         productsList = emptyList()
+        myContext = context
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductsHolder {
@@ -33,7 +34,7 @@ class ProductsAdapter(private val context: Context, var listener: ClickListener)
     }
 
     override fun onBindViewHolder(holder: ProductsHolder, position: Int) {
-        holder.bind(productsList[position], listener)
+        holder.bind(myContext!!,productsList[position], listener)
     }
 
     fun add(productList: List<Product>) {
@@ -49,10 +50,10 @@ class ProductsAdapter(private val context: Context, var listener: ClickListener)
             this.listener = listener
         }
 
-        fun bind(product: Product, listener: ClickListener) {
+        fun bind(context:Context,product: Product, listener: ClickListener) {
             Picasso.get().load(product.thumbnail).into(itemView.iv_product)
             itemView.tv_title.text = product.title
-            itemView.tv_price.text = product.price.toString()
+            itemView.tv_price.text = String.format(context.getString(R.string.price),product?.price.toString())
             itemView.setOnClickListener(View.OnClickListener {
                 listener.onClick(it, product)
             })
