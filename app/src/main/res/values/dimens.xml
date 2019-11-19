@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="margin_x5">5dp</dimen>
     <dimen name="margin_x10">10dp</dimen>
     <dimen name="margin_x20">20dp</dimen>
     <dimen name="margin_x30">30dp</dimen>
     <dimen name="margin_x40">40dp</dimen>
     <dimen name="margin_x50">50dp</dimen>
     <dimen name="margin_x100">100dp</dimen>
+    <dimen name="title_product_list">10sp</dimen>
+    <dimen name="price_product_list">15sp</dimen>
+    <dimen name="free_shipping_product_list">8sp</dimen>
+
 </resources>

@@ -8,6 +8,8 @@ import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.milachallenge.presentation.itemSelected.ItemDetailsActivity
@@ -49,6 +51,7 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
 
     override fun showProductList(resultSearch: ResultSearch) {
         rvProducts?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvProducts?.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
         rvProducts?.adapter = productAdapter
         productAdapter.add(resultSearch.results)
     }

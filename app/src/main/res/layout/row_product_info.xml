@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/margin_x50"
     android:orientation="horizontal"
-    android:layout_margin="@dimen/margin_x10">
+    android:layout_margin="@dimen/margin_x5">
     <TextView
         android:id="@+id/tv_info_product_name"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:padding="@dimen/margin_x10"
+        android:padding="@dimen/margin_x5"
         android:gravity="center_vertical"
         android:background="@color/gray" />
     <TextView
@@ -17,7 +17,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:padding="@dimen/margin_x10"
+        android:padding="@dimen/margin_x5"
         android:gravity="center_vertical"
         android:background="@color/LightGrey" />
 </LinearLayout>
