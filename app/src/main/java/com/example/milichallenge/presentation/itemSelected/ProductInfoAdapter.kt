@@ -6,59 +6,50 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.example.milachallenge.presentation.main.adapter.model.Attribute
+import com.example.milachallenge.presentation.main.adapter.model.Product
 import com.example.milichallenge.R
+import com.example.milichallenge.presentation.main.view.ProductsAdapter
+import kotlinx.android.synthetic.main.row_product_info.view.*
 
-class ProductInfoAdapter(context: Context, attributes: List<Attribute>) : BaseAdapter() {
-    var attributes: List<Attribute>? = null
-    var context: Context? = null
+class ProductInfoAdapter(context: Context, attributes: List<Attribute>) : RecyclerView.Adapter<ProductInfoAdapter.ProductInfoHolder>() {
+    var attributesList: List<Attribute>? = null
+    var myContext: Context? = null
 
     init {
-        this.attributes = attributes
-        this.context = context
+        attributesList = attributes
+        myContext = context
     }
 
-    override fun getItem(position: Int): Any {
-        return attributes?.get(position)!!
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductInfoHolder {
+        return ProductInfoAdapter.ProductInfoHolder(
+            LayoutInflater.from(myContext).inflate(
+                R.layout.row_product_info,
+                parent,
+                false)
+        )
     }
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
+    override fun getItemCount(): Int {
+        return this.attributesList?.size!!
     }
 
-    override fun getCount(): Int {
-        return this.attributes?.size!!
+    override fun onBindViewHolder(holder: ProductInfoHolder, position: Int) {
+        holder.bind(myContext!!, attributesList?.get(position), position)
+
     }
 
-    override fun getView(position: Int, itemView: View?, parent: ViewGroup?): View {
-        val view: View?
-        val productInfoHolder: ProductInfoHolder
-        if (itemView == null) {
-            view =
-                LayoutInflater.from(this.context).inflate(R.layout.row_product_info, parent, false)
-            productInfoHolder = ProductInfoHolder(view)
-            productInfoHolder.tvInfoProductName?.text = attributes?.get(position)?.name
-            productInfoHolder.tvInfoProductValue?.text = attributes?.get(position)?.valueName
-            productInfoHolder.tvInfoProductName?.setBackgroundResource(if (position % 2 != 0) R.color.LightGrey else R.color.gray)
-            productInfoHolder.tvInfoProductValue?.setBackgroundResource(if (position % 2 != 0) R.color.white else R.color.LightGrey)
 
-            view.tag = productInfoHolder
-        } else {
-            view = itemView
-            productInfoHolder = view.tag as ProductInfoHolder
-        }
-        return view!!
-    }
-
-    private class ProductInfoHolder(row: View?) {
-        var tvInfoProductName: TextView? = null
-        var tvInfoProductValue: TextView? = null
-
-        init {
-            tvInfoProductName = row?.findViewById(R.id.tv_info_product_name)
-            tvInfoProductValue = row?.findViewById(R.id.tv_info_product_value)
-
-        }
+     class ProductInfoHolder(itemView: View):RecyclerView.ViewHolder(itemView)  {
+         fun bind(context:Context, attribute : Attribute?, position:Int){
+             itemView.tv_info_product_name.text = attribute?.name
+             itemView.tv_info_product_value.text = attribute?.valueName
+             itemView.tv_info_product_name.setBackgroundResource(if (position % 2 != 0) R.color.LightGrey else R.color.gray)
+             itemView.tv_info_product_value.setBackgroundResource(if (position % 2 != 0) R.color.white else R.color.LightGrey)
+         }
     }
 
 }
+

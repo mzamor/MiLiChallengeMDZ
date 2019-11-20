@@ -8,4 +8,6 @@
     <string name="new_product">Nuevo</string>
     <string name="sold_quantity">%s vendidos</string>
     <string name="bar_separator">%s1 | %s2</string>
+    <string name="item_status">2230284</string>
+
 </resources>
