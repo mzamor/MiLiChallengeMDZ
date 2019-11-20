@@ -69,7 +69,8 @@ class ProductsAdapter(private val context: Context, var listener: ClickListener)
                 if ((product.installments.quantity > 0) && !(product.installments.rate > 0)) VISIBLE else GONE
             itemView.tv_free_shipping.visibility =
                 if (product.shipping.freeShipping) VISIBLE else GONE
-            itemView.rb_stars_number.numStars = (0..5).random()
+            itemView.rb_stars_number.numStars = 5
+            itemView.rb_stars_number.setRating((0..5).random().toFloat())
             itemView.tv_comments_number.text = (0..1000).random().toString()
             itemView.setOnClickListener(View.OnClickListener {
                 listener.onClick(it, product)

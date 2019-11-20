@@ -10,5 +10,6 @@
     <dimen name="title_product_list">18sp</dimen>
     <dimen name="price_product_list">25sp</dimen>
     <dimen name="free_shipping_product_list">15sp</dimen>
+    <dimen name="comments_number_product_list">12sp</dimen>
 
 </resources>
