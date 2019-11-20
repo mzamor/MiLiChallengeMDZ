@@ -8,7 +8,6 @@ import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +18,6 @@ import com.example.milachallenge.presentation.main.adapter.model.ResultSearch
 import com.example.milachallenge.presentation.main.presenter.MainPresenter
 import com.example.milichallenge.R
 import com.google.gson.Gson
-import java.io.Serializable
 
 class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQueryTextListener {
     lateinit var presenter: MainPresenter
@@ -42,7 +40,7 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
     }
 
     override fun navigateToItemDetails(view: View, product: Product) {
-        val intent = Intent(this@MainActivity,ItemDetailsActivity::class.java)
+        val intent = Intent(this@MainActivity, ItemDetailsActivity::class.java)
         val gson = Gson()
         val productJson = gson.toJson(product)
         intent.putExtra("PRODUCT", productJson)

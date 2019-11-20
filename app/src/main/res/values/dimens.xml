@@ -7,8 +7,8 @@
     <dimen name="margin_x40">40dp</dimen>
     <dimen name="margin_x50">50dp</dimen>
     <dimen name="margin_x100">100dp</dimen>
-    <dimen name="title_product_list">10sp</dimen>
-    <dimen name="price_product_list">15sp</dimen>
-    <dimen name="free_shipping_product_list">8sp</dimen>
+    <dimen name="title_product_list">18sp</dimen>
+    <dimen name="price_product_list">25sp</dimen>
+    <dimen name="free_shipping_product_list">15sp</dimen>
 
 </resources>

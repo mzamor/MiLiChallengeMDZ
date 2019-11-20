@@ -1,7 +1,6 @@
 package com.example.milichallenge.presentation.main.view
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -58,10 +57,20 @@ class ProductsAdapter(private val context: Context, var listener: ClickListener)
         fun bind(context: Context, product: Product, listener: ClickListener) {
             Picasso.get().load(product.thumbnail).into(itemView.iv_product)
             itemView.tv_title.text = product.title
-            itemView.tv_price.text = String.format(context.getString(R.string.price), product.price.roundToInt().toString())
-            itemView.tv_installments.text = String.format(context.getString(R.string.installments), product.installments.quantity.toString())
-            itemView.tv_installments.visibility = if((product.installments.quantity>0) && !(product.installments.rate > 0)) VISIBLE else GONE
-            itemView.tv_free_shipping.visibility = if(product.shipping.freeShipping) VISIBLE else GONE
+            itemView.tv_price.text = String.format(
+                context.getString(R.string.price),
+                product.price.roundToInt().toString()
+            )
+            itemView.tv_installments.text = String.format(
+                context.getString(R.string.installments),
+                product.installments.quantity.toString()
+            )
+            itemView.tv_installments.visibility =
+                if ((product.installments.quantity > 0) && !(product.installments.rate > 0)) VISIBLE else GONE
+            itemView.tv_free_shipping.visibility =
+                if (product.shipping.freeShipping) VISIBLE else GONE
+            itemView.rb_stars_number.numStars = (0..5).random()
+            itemView.tv_comments_number.text = (0..1000).random().toString()
             itemView.setOnClickListener(View.OnClickListener {
                 listener.onClick(it, product)
             })

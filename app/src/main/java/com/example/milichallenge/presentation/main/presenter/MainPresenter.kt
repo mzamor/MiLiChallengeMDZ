@@ -14,16 +14,18 @@ class MainPresenter : MainContract.MainPresenter {
 
     var view: MainContract.MainView? = null
 
-    override fun queryProducts(site:String, productSearch:String) {
-        val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl("https://api.mercadolibre.com/sites/").build()
+    override fun queryProducts(site: String, productSearch: String) {
+        val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://api.mercadolibre.com/sites/").build()
         val service = retrofit.create(SearchServices::class.java)
-        val call = service.getSearchProducts(site,productSearch)
-        call.enqueue(object: Callback<ResultSearch> {
+        val call = service.getSearchProducts(site, productSearch)
+        call.enqueue(object : Callback<ResultSearch> {
             override fun onResponse(call: Call<ResultSearch>, response: Response<ResultSearch>) {
                 Log.e("response", response.body().toString())
-                val resultSearch:ResultSearch  = response.body()!!
+                val resultSearch: ResultSearch = response.body()!!
                 view?.showProductList(resultSearch)
             }
+
             override fun onFailure(call: Call<ResultSearch>, t: Throwable) {
             }
         })
