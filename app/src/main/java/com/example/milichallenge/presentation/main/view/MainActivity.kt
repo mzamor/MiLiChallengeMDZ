@@ -23,6 +23,7 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
     lateinit var presenter: MainPresenter
     private var rvProducts: RecyclerView? = null
     private var svProductsMenu: SearchView? = null
+    private var loading = false
     private val productAdapter: ProductsAdapter by lazy {
         ProductsAdapter(this, object : ClickListener {
             override fun onClick(view: View, product: Product) {
@@ -48,9 +49,23 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
     }
 
     override fun showProductList(resultSearch: ResultSearch) {
-        rvProducts?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        var linearLayoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        rvProducts?.layoutManager = linearLayoutManager
         rvProducts?.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
         rvProducts?.adapter = productAdapter
+        rvProducts?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val visibleItemCount = linearLayoutManager.childCount
+                val totalItemCount = linearLayoutManager.itemCount
+                val firstVisible = linearLayoutManager.findFirstVisibleItemPosition()
+                if (!loading && (visibleItemCount + firstVisible) >= totalItemCount) {
+                    loading = true
+                }
+            }
+        })
+
+
         productAdapter.add(resultSearch.results)
     }
 

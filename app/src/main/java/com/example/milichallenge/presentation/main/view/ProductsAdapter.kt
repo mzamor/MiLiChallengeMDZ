@@ -38,6 +38,7 @@ class ProductsAdapter(private val context: Context, var listener: ClickListener)
     }
 
     override fun onBindViewHolder(holder: ProductsHolder, position: Int) {
+
         holder.bind(myContext!!, productsList[position], listener)
     }
 
@@ -66,7 +67,7 @@ class ProductsAdapter(private val context: Context, var listener: ClickListener)
                 product.installments.quantity.toString()
             )
             itemView.tv_installments.visibility =
-                if ((product.installments.quantity > 0) && !(product.installments.rate > 0)) VISIBLE else GONE
+                if ((product.installments.quantity > 0) && (product.installments.rate <= 0)) VISIBLE else GONE
             itemView.tv_free_shipping.visibility =
                 if (product.shipping.freeShipping) VISIBLE else GONE
             itemView.rb_stars_number.numStars = 5

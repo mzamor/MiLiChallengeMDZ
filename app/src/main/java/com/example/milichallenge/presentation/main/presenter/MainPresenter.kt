@@ -18,7 +18,7 @@ class MainPresenter : MainContract.MainPresenter {
         val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
             .baseUrl("https://api.mercadolibre.com/sites/").build()
         val service = retrofit.create(SearchServices::class.java)
-        val call = service.getSearchProducts(site, productSearch)
+        val call = service.getSearchProducts(site, productSearch,"50")
         call.enqueue(object : Callback<ResultSearch> {
             override fun onResponse(call: Call<ResultSearch>, response: Response<ResultSearch>) {
                 Log.e("response", response.body().toString())
