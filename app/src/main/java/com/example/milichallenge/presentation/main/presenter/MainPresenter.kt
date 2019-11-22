@@ -13,12 +13,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainPresenter : MainContract.MainPresenter {
 
     var view: MainContract.MainView? = null
-
-    override fun queryProducts(site: String, productSearch: String) {
+    override fun queryProducts(site: String, productSearch: String, pagingNumber : Int) {
         val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
             .baseUrl("https://api.mercadolibre.com/sites/").build()
         val service = retrofit.create(SearchServices::class.java)
-        val call = service.getSearchProducts(site, productSearch,"50")
+        val call = service.getSearchProducts(site, productSearch,pagingNumber.toString(),"6")
         call.enqueue(object : Callback<ResultSearch> {
             override fun onResponse(call: Call<ResultSearch>, response: Response<ResultSearch>) {
                 Log.e("response", response.body().toString())

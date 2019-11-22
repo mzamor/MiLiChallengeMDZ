@@ -15,11 +15,11 @@ import kotlin.math.roundToInt
 
 class ProductsAdapter(private val context: Context, var listener: ClickListener) :
     RecyclerView.Adapter<ProductsAdapter.ProductsHolder>() {
-    var productsList: List<Product>
+    var productsList: MutableList<Product>
     var myContext: Context? = null
 
     init {
-        productsList = emptyList()
+        productsList = ArrayList()
         myContext = context
     }
 
@@ -42,11 +42,15 @@ class ProductsAdapter(private val context: Context, var listener: ClickListener)
         holder.bind(myContext!!, productsList[position], listener)
     }
 
-    fun add(productList: List<Product>) {
-        productsList = productList
+    fun addAll(productList: List<Product>) {
+        productsList.addAll(productList)
         notifyDataSetChanged()
     }
 
+    fun clear() {
+        productsList.clear()
+        notifyDataSetChanged()
+    }
     class ProductsHolder(itemView: View, listener: ClickListener) :
         RecyclerView.ViewHolder(itemView) {
         var listener: ClickListener? = null

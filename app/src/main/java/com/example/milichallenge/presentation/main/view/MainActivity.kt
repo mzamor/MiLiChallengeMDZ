@@ -23,7 +23,8 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
     lateinit var presenter: MainPresenter
     private var rvProducts: RecyclerView? = null
     private var svProductsMenu: SearchView? = null
-    private var loading = false
+    private var pagingNumber = 0
+    private var myQuery = ""
     private val productAdapter: ProductsAdapter by lazy {
         ProductsAdapter(this, object : ClickListener {
             override fun onClick(view: View, product: Product) {
@@ -38,6 +39,22 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
         rvProducts = findViewById(R.id.rv_products)
         presenter = MainPresenter()
         presenter.attachView(this)
+        var linearLayoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        rvProducts?.layoutManager = linearLayoutManager
+        rvProducts?.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+        rvProducts?.adapter = productAdapter
+        rvProducts?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val visibleItemCount = linearLayoutManager.childCount
+                val totalItemCount = linearLayoutManager.itemCount
+                val firstVisible = linearLayoutManager.findFirstVisibleItemPosition()
+                if ( (visibleItemCount + firstVisible) >= totalItemCount) {
+                    pagingNumber=+6
+                    presenter.queryProducts("MLA", myQuery,pagingNumber)
+                }
+            }
+        })
     }
 
     override fun navigateToItemDetails(view: View, product: Product) {
@@ -49,28 +66,14 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
     }
 
     override fun showProductList(resultSearch: ResultSearch) {
-        var linearLayoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
-        rvProducts?.layoutManager = linearLayoutManager
-        rvProducts?.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-        rvProducts?.adapter = productAdapter
-        rvProducts?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val visibleItemCount = linearLayoutManager.childCount
-                val totalItemCount = linearLayoutManager.itemCount
-                val firstVisible = linearLayoutManager.findFirstVisibleItemPosition()
-                if (!loading && (visibleItemCount + firstVisible) >= totalItemCount) {
-                    loading = true
-                }
-            }
-        })
-
-
-        productAdapter.add(resultSearch.results)
+            productAdapter.addAll(resultSearch.results)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        presenter.queryProducts("MLA", query!!)
+        pagingNumber = 0
+        myQuery = query!!
+        productAdapter.clear()
+        presenter.queryProducts("MLA", query!!,pagingNumber)
         return false
     }
 
@@ -79,7 +82,6 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
         //   presenter.queryProducts("MLA",newText!!)
         return false
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)

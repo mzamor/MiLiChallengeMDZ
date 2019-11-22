@@ -13,6 +13,6 @@ interface MainContract {
     interface MainPresenter {
         fun attachView(mainView: MainContract.MainView)
         fun dettachView()
-        fun queryProducts(site: String, productSearch: String)
+        fun queryProducts(site: String, productSearch: String, pagingNumber : Int)
     }
 }
