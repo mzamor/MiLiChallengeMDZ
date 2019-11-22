@@ -17,7 +17,9 @@ import com.example.milachallenge.presentation.main.adapter.model.Product
 import com.example.milachallenge.presentation.main.adapter.model.ResultSearch
 import com.example.milachallenge.presentation.main.presenter.MainPresenter
 import com.example.milichallenge.R
+import com.example.milichallenge.presentation.domain.interactor.searchProducts.SearchProductInteractorImpl
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQueryTextListener {
     lateinit var presenter: MainPresenter
@@ -37,7 +39,7 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         rvProducts = findViewById(R.id.rv_products)
-        presenter = MainPresenter()
+        presenter = MainPresenter(SearchProductInteractorImpl())
         presenter.attachView(this)
         var linearLayoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
         rvProducts?.layoutManager = linearLayoutManager
@@ -78,8 +80,6 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        Log.e("newText", newText)
-        //   presenter.queryProducts("MLA",newText!!)
         return false
     }
 
@@ -90,6 +90,14 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
             InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS
         svProductsMenu?.setOnQueryTextListener(this)
         return true
+    }
+
+    override fun showProgressBar() {
+        pb_products.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressBar() {
+        pb_products.visibility = View.GONE
     }
 
     override fun onDestroy() {

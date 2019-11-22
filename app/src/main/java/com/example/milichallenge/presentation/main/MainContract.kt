@@ -8,11 +8,14 @@ interface MainContract {
     interface MainView {
         fun navigateToItemDetails(view: View, product: Product)
         fun showProductList(resultSearch: ResultSearch)
+        fun showProgressBar()
+        fun hideProgressBar()
     }
 
     interface MainPresenter {
         fun attachView(mainView: MainContract.MainView)
         fun dettachView()
+        fun isViewAttached() : Boolean
         fun queryProducts(site: String, productSearch: String, pagingNumber : Int)
     }
 }
