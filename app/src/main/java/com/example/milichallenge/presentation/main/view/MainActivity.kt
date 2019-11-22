@@ -3,7 +3,6 @@ package com.example.milichallenge.presentation.main.view
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -22,11 +21,26 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQueryTextListener {
+    private lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var presenter: MainPresenter
     private var rvProducts: RecyclerView? = null
     private var svProductsMenu: SearchView? = null
     private var pagingNumber = 0
     private var myQuery = ""
+
+    private val onScrollHandler = object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            val visibleItemCount = linearLayoutManager.childCount
+            val totalItemCount = linearLayoutManager.itemCount
+            val firstVisible = linearLayoutManager.findFirstVisibleItemPosition()
+            if ( (visibleItemCount + firstVisible) >= totalItemCount) {
+                pagingNumber=+6
+                presenter.queryProducts("MLA", myQuery,pagingNumber)
+            }
+        }
+    }
+
     private val productAdapter: ProductsAdapter by lazy {
         ProductsAdapter(this, object : ClickListener {
             override fun onClick(view: View, product: Product) {
@@ -41,22 +55,15 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
         rvProducts = findViewById(R.id.rv_products)
         presenter = MainPresenter(SearchProductInteractorImpl())
         presenter.attachView(this)
-        var linearLayoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
-        rvProducts?.layoutManager = linearLayoutManager
-        rvProducts?.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-        rvProducts?.adapter = productAdapter
-        rvProducts?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val visibleItemCount = linearLayoutManager.childCount
-                val totalItemCount = linearLayoutManager.itemCount
-                val firstVisible = linearLayoutManager.findFirstVisibleItemPosition()
-                if ( (visibleItemCount + firstVisible) >= totalItemCount) {
-                    pagingNumber=+6
-                    presenter.queryProducts("MLA", myQuery,pagingNumber)
-                }
-            }
-        })
+
+        linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+
+        rvProducts?.apply {
+            layoutManager = layoutManager
+            addItemDecoration(DividerItemDecoration(this@MainActivity, LinearLayoutManager.VERTICAL))
+            adapter = productAdapter
+            addOnScrollListener(onScrollHandler)
+        }
     }
 
     override fun navigateToItemDetails(view: View, product: Product) {
