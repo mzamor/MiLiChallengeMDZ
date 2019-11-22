@@ -21,7 +21,8 @@ class MainPresenter(searchProductInteractor : SearchProductInteractor) : MainCon
     }
 
     override fun queryProducts(site: String, productSearch: String, pagingNumber : Int) {
-       this.searchProductInteractor?.queryProducts(site,productSearch,pagingNumber,object : SearchProductInteractor.SearchProductsCallback{
+        view?.showProgressBar()
+        this.searchProductInteractor?.queryProducts(site,productSearch,pagingNumber,object : SearchProductInteractor.SearchProductsCallback{
            override fun onSearchProductsSuccess(resultSearch: ResultSearch) {
                if(isViewAttached()) {
                    view?.hideProgressBar()
