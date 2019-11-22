@@ -32,7 +32,24 @@ data class Product(
     val sellerAddress: Address,
     @SerializedName("attributes")
     val attributes: List<Attribute>,
-    val ratingStars: Int,
-    val commentsNumber: Int
-) : Serializable
+    var ratingStars: Int,
+    var commentsNumber: Int
+) : Serializable{
+
+    fun getStar() : Int {
+        if(ratingStars == 0){
+            ratingStars = (0..5).random()
+            return ratingStars
+        }
+        return ratingStars
+    }
+
+    fun getCommentNumber() : Int {
+        if(commentsNumber == 0){
+            commentsNumber = (0..1000).random()
+            return commentsNumber
+        }
+        return commentsNumber
+    }
+}
 
