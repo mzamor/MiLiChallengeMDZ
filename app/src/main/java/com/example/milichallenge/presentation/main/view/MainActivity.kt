@@ -28,7 +28,10 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
     private var rvProducts: RecyclerView? = null
     private var resultsProducts : List<Product>? = null
     private var svProductsMenu: SearchView? = null
-    private var pagingNumber : Int = 0
+    private var isLoading : Boolean = true
+    private var previousTotal = 0
+    private var visibleThreshold = 5
+    private var pagingNumber  = 0
     private var myQuery = ""
     private val productAdapter: ProductsAdapter by lazy {
         ProductsAdapter(this, object : ClickListener {
@@ -57,8 +60,16 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
                 val visibleItemCount = linearLayoutManager.childCount
                 val totalItemCount = linearLayoutManager.itemCount
                 val firstVisible = linearLayoutManager.findFirstVisibleItemPosition()
-                if ( (visibleItemCount + firstVisible) >= totalItemCount) {
+                if(isLoading){
+                    if(previousTotal<totalItemCount) {
+                        isLoading = false
+                        previousTotal = totalItemCount
+                    }
+                }
+
+                if ( !isLoading && (firstVisible + visibleThreshold) >= totalItemCount - visibleItemCount) {
                     pagingNumber += 6
+                    isLoading = true
                     presenter.queryProducts("MLA", myQuery,pagingNumber)
                 }
             }
@@ -101,7 +112,7 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
     override fun onQueryTextSubmit(query: String?): Boolean {
         myQuery = query!!
         productAdapter.clear()
-        presenter.queryProducts("MLA", query!!,pagingNumber)
+        presenter.queryProducts("MLA", query,pagingNumber)
         return false
     }
 
