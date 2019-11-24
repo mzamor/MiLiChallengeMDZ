@@ -1,54 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="@dimen/margin_x20"
-    android:background="@color/white">
-
-    <TextView
-        android:id="@+id/tv_sold_products"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_x20" />
-
-    <TextView
-        android:id="@+id/tv_title_product_detail"
-        style="@style/productTitleList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_x20" />
-
-    <ImageView
-        android:id="@+id/iv_product_detail"
-        android:layout_width="@dimen/margin_x150"
-        android:layout_height="@dimen/margin_x150"
-        android:layout_gravity="center_horizontal"/>
-
-    <TextView
-        android:id="@+id/tv_price_product_detail"
-        style="@style/productPriceList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_x20" />
-
-    <TextView
-        android:id="@+id/tv_title_product_info"
-        android:textSize="@dimen/title_product_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_x20"
-        android:text="@string/product_info" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_product_info"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_x20"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_sold_products"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_x20" />
+
+        <TextView
+            android:id="@+id/tv_title_product_detail"
+            style="@style/productTitleList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_x20" />
+
+        <ImageView
+            android:id="@+id/iv_product_detail"
+            android:layout_width="@dimen/margin_x150"
+            android:layout_height="@dimen/margin_x150"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/tv_price_product_detail"
+            style="@style/productPriceList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_x20" />
+
+        <TextView
+            android:id="@+id/tv_title_product_info"
+            android:textSize="@dimen/title_product_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_x20"
+            android:text="@string/product_info" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_product_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </ScrollView>

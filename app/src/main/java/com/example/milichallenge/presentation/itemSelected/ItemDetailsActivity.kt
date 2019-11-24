@@ -1,7 +1,6 @@
 package com.example.milachallenge.presentation.itemSelected
 
 import android.os.Bundle
-import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +12,6 @@ import com.example.milichallenge.presentation.itemSelected.ProductInfoAdapter
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_item_details.*
-import kotlinx.android.synthetic.main.item_product_list.view.*
 
 class ItemDetailsActivity : AppCompatActivity() {
     private var product: Product? = null
@@ -36,13 +34,17 @@ class ItemDetailsActivity : AppCompatActivity() {
     }
 
     fun productInfo() {
-        rvProductInfo?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvProductInfo?.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvProductInfo?.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
         rvProductInfo?.isNestedScrollingEnabled = false;
-        rvProductInfo?.adapter = ProductInfoAdapter(this, filterAttributeById(getString(R.string.item_status),product?.attributes!!))
+        rvProductInfo?.adapter = ProductInfoAdapter(
+            this,
+            filterAttributeById(getString(R.string.item_status), product?.attributes!!)
+        )
     }
 
-    fun filterAttributeById( valueId:String, lvProductInfo: List<Attribute>) : List<Attribute> {
+    fun filterAttributeById(valueId: String, lvProductInfo: List<Attribute>): List<Attribute> {
         return lvProductInfo.filter { s -> s.valueId != valueId }
     }
 }

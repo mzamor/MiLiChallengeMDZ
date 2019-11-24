@@ -34,18 +34,18 @@ data class Product(
     val attributes: List<Attribute>,
     var ratingStars: Int,
     var commentsNumber: Int
-) : Serializable{
+) : Serializable {
 
-    fun getStar() : Int {
-        if(ratingStars == 0){
+    fun getStar(): Int {
+        if (ratingStars == 0) {
             ratingStars = (0..5).random()
             return ratingStars
         }
         return ratingStars
     }
 
-    fun getCommentNumber() : Int {
-        if(commentsNumber == 0){
+    fun getCommentNumber(): Int {
+        if (commentsNumber == 0) {
             commentsNumber = (0..1000).random()
             return commentsNumber
         }

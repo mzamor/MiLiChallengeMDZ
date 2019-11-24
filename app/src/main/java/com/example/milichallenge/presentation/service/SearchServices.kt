@@ -8,5 +8,9 @@ import retrofit2.http.Query
 
 interface SearchServices {
     @GET("{site}/search")
-    fun getSearchProducts(@Path("site") site: String, @Query("q") productSearch: String, @Query("offset") offset:String , @Query("limit") limitSearch: String): Call<ResultSearch>
+    fun getSearchProducts(
+        @Path("site") site: String, @Query("q") productSearch: String, @Query("offset") offset: String, @Query(
+            "limit"
+        ) limitSearch: String
+    ): Call<ResultSearch>
 }

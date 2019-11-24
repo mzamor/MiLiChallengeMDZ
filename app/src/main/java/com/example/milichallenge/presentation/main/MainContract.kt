@@ -2,7 +2,6 @@ package com.example.milachallenge.presentation.main
 
 import android.view.View
 import com.example.milachallenge.presentation.main.adapter.model.Product
-import com.example.milachallenge.presentation.main.adapter.model.ResultSearch
 
 interface MainContract {
     interface MainView {
@@ -15,7 +14,7 @@ interface MainContract {
     interface MainPresenter {
         fun attachView(mainView: MainContract.MainView)
         fun dettachView()
-        fun isViewAttached() : Boolean
-        fun queryProducts(site: String, productSearch: String, pagingNumber : Int)
+        fun isViewAttached(): Boolean
+        fun queryProducts(site: String, productSearch: String, pagingNumber: Int)
     }
 }
