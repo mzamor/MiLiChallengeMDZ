@@ -22,6 +22,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQueryTextListener {
     lateinit var presenter: MainPresenter
+    private val siteQuery = "MLA"
+    private val paginationStepNumber = 20
     private var rvProducts: RecyclerView? = null
     private var resultsProducts: List<Product>? = null
     private var svProductsMenu: SearchView? = null
@@ -65,9 +67,9 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
                 }
 
                 if (!isLoading && (firstVisible + visibleThreshold) >= totalItemCount - visibleItemCount) {
-                    pagingNumber += 20
+                    pagingNumber += paginationStepNumber
                     isLoading = true
-                    presenter.queryProducts("MLA", myQuery, pagingNumber)
+                    presenter.queryProducts(siteQuery , myQuery, pagingNumber)
                 }
             }
         })
@@ -111,7 +113,7 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
     override fun onQueryTextSubmit(query: String?): Boolean {
         myQuery = query!!
         productAdapter.clear()
-        presenter.queryProducts("MLA", query, pagingNumber)
+        presenter.queryProducts(siteQuery, query, pagingNumber)
         return false
     }
 

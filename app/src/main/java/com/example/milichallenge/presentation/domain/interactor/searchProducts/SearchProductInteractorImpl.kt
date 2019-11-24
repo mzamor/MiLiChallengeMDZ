@@ -9,6 +9,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class SearchProductInteractorImpl : SearchProductInteractor {
+    private val urlBase = "https://api.mercadolibre.com/sites/"
+    private val limitSearch = "20"
     override fun queryProducts(
         site: String,
         productSearch: String,
@@ -16,14 +18,13 @@ class SearchProductInteractorImpl : SearchProductInteractor {
         listener: SearchProductInteractor.SearchProductsCallback
     ) {
         val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("https://api.mercadolibre.com/sites/").build()
+            .baseUrl(urlBase).build()
         val service = retrofit.create(SearchServices::class.java)
-        val call = service.getSearchProducts(site, productSearch, pagingNumber.toString(), "20")
+        val call = service.getSearchProducts(site, productSearch, pagingNumber.toString(), limitSearch)
         call.enqueue(object : Callback<ResultSearch> {
             override fun onResponse(call: Call<ResultSearch>, response: Response<ResultSearch>) {
                 val resultSearch: ResultSearch = response.body()!!
                 listener.onSearchProductsSuccess(resultSearch)
-
             }
 
             override fun onFailure(call: Call<ResultSearch>, t: Throwable) {
