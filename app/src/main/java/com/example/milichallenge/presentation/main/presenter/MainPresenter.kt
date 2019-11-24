@@ -26,7 +26,7 @@ class MainPresenter(searchProductInteractor : SearchProductInteractor) : MainCon
            override fun onSearchProductsSuccess(resultSearch: ResultSearch) {
                if(isViewAttached()) {
                    view?.hideProgressBar()
-                   view?.showProductList(resultSearch)
+                   view?.showProductList(resultSearch.results)
                }
            }
 

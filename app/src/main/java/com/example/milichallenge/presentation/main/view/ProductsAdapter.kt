@@ -48,6 +48,9 @@ class ProductsAdapter(private val context: Context, var listener: ClickListener)
         notifyDataSetChanged()
     }
 
+    fun getProducts() : List<Product>{
+        return productsList
+    }
     fun clear() {
         productsList.clear()
         notifyDataSetChanged()
@@ -65,7 +68,6 @@ class ProductsAdapter(private val context: Context, var listener: ClickListener)
             itemView.tv_title.text = product.title
             itemView.tv_price.text = String.format(context.getString(R.string.price), product.price.roundToInt().toString())
             if(product.installments != null){
-                Log.e("quantity",product.installments.quantity.toString())
                 itemView.tv_installments.text = String.format(context.getString(R.string.installments), product.installments.quantity.toString())
                 itemView.tv_free_shipping.visibility = if (product.shipping.freeShipping) VISIBLE else GONE
             }

@@ -2,6 +2,7 @@ package com.example.milichallenge.presentation.main.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.text.InputType
 import android.util.Log
 import android.view.Menu
@@ -19,13 +20,15 @@ import com.example.milachallenge.presentation.main.presenter.MainPresenter
 import com.example.milichallenge.R
 import com.example.milichallenge.presentation.domain.interactor.searchProducts.SearchProductInteractorImpl
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQueryTextListener {
     lateinit var presenter: MainPresenter
     private var rvProducts: RecyclerView? = null
+    private var resultsProducts : List<Product>? = null
     private var svProductsMenu: SearchView? = null
-    private var pagingNumber = 0
+    private var pagingNumber : Int = 0
     private var myQuery = ""
     private val productAdapter: ProductsAdapter by lazy {
         ProductsAdapter(this, object : ClickListener {
@@ -41,7 +44,10 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
         rvProducts = findViewById(R.id.rv_products)
         presenter = MainPresenter(SearchProductInteractorImpl())
         presenter.attachView(this)
-        var linearLayoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        val linearLayoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        if(savedInstanceState==null){
+            resultsProducts = ArrayList<Product>()
+        }
         rvProducts?.layoutManager = linearLayoutManager
         rvProducts?.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
         rvProducts?.adapter = productAdapter
@@ -52,11 +58,30 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
                 val totalItemCount = linearLayoutManager.itemCount
                 val firstVisible = linearLayoutManager.findFirstVisibleItemPosition()
                 if ( (visibleItemCount + firstVisible) >= totalItemCount) {
-                    pagingNumber=+6
+                    pagingNumber += 6
                     presenter.queryProducts("MLA", myQuery,pagingNumber)
                 }
             }
         })
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val gson = Gson()
+        val productListJson = gson.toJson(resultsProducts)
+        outState.putSerializable("PRODUCT_ARRAY_LIST", productListJson)
+        Log.e("paging number",pagingNumber.toString())
+        outState.putInt("PAGING_NUMBER",pagingNumber)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        val gson = Gson()
+        val listType  = object : TypeToken<ArrayList<Product>>(){}.type
+        resultsProducts = gson.fromJson<List<Product>>(savedInstanceState.getSerializable("PRODUCT_ARRAY_LIST").toString(), listType)
+        showProductList(resultsProducts!!)
+        pagingNumber = savedInstanceState.getInt("PAGING_NUMBER")
+        Log.e("paging number",pagingNumber.toString())
+        super.onRestoreInstanceState(savedInstanceState)
     }
 
     override fun navigateToItemDetails(view: View, product: Product) {
@@ -67,12 +92,13 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
         startActivity(intent)
     }
 
-    override fun showProductList(resultSearch: ResultSearch) {
-            productAdapter.addAll(resultSearch.results)
+    override fun showProductList(result : List<Product>) {
+        productAdapter.addAll(result)
+        resultsProducts = productAdapter.getProducts()
+        Log.e("cantidadProds",resultsProducts?.size.toString())
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        pagingNumber = 0
         myQuery = query!!
         productAdapter.clear()
         presenter.queryProducts("MLA", query!!,pagingNumber)
@@ -80,6 +106,7 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
+        pagingNumber = 0
         return false
     }
 

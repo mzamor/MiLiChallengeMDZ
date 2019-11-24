@@ -7,7 +7,7 @@ import com.example.milachallenge.presentation.main.adapter.model.ResultSearch
 interface MainContract {
     interface MainView {
         fun navigateToItemDetails(view: View, product: Product)
-        fun showProductList(resultSearch: ResultSearch)
+        fun showProductList(result: List<Product>)
         fun showProgressBar()
         fun hideProgressBar()
     }
