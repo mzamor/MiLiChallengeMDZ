@@ -81,8 +81,8 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
         val gson = Gson()
         val productListJson = gson.toJson(resultsProducts)
         outState.putSerializable("PRODUCT_ARRAY_LIST", productListJson)
-        Log.e("paging number",pagingNumber.toString())
         outState.putInt("PAGING_NUMBER",pagingNumber)
+        outState.putString("QUERY",myQuery)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -91,7 +91,7 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
         resultsProducts = gson.fromJson<List<Product>>(savedInstanceState.getSerializable("PRODUCT_ARRAY_LIST").toString(), listType)
         showProductList(resultsProducts!!)
         pagingNumber = savedInstanceState.getInt("PAGING_NUMBER")
-        Log.e("paging number",pagingNumber.toString())
+        myQuery = savedInstanceState.getString("QUERY")!!
         super.onRestoreInstanceState(savedInstanceState)
     }
 
@@ -106,7 +106,6 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
     override fun showProductList(result : List<Product>) {
         productAdapter.addAll(result)
         resultsProducts = productAdapter.getProducts()
-        Log.e("cantidadProds",resultsProducts?.size.toString())
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
