@@ -133,8 +133,7 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         svProductsMenu = menu?.findItem(R.id.app_bar_search)?.actionView as SearchView
-        svProductsMenu?.inputType =
-            InputType.TYPE_CLASS_TEXT
+        svProductsMenu?.inputType = InputType.TYPE_CLASS_TEXT
         svProductsMenu?.onActionViewExpanded()
         svProductsMenu?.queryHint = "Buscar en Mercado Libre"
         svProductsMenu?.setOnQueryTextListener(this)
