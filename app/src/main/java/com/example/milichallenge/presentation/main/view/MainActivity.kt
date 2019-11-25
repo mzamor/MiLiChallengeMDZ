@@ -162,8 +162,4 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
     override fun hideProgressBar() {
         pb_products.visibility = View.GONE
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 }

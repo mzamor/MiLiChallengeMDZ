@@ -23,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.milachallenge.presentation.itemSelected.ItemDetailsActivity"/>
+        <activity android:name="com.example.milachallenge.presentation.itemSelected.ItemDetailsActivity"
+            android:parentActivityName=".presentation.main.view.MainActivity"/>
         </application>
 </manifest>

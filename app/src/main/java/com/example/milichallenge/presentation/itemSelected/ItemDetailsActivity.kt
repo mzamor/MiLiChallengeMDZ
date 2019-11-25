@@ -1,6 +1,7 @@
 package com.example.milachallenge.presentation.itemSelected
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -21,6 +22,7 @@ class ItemDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_details)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         rvProductInfo = findViewById(R.id.rv_product_info)
         var soldProduct : String
         val intent = intent
@@ -55,5 +57,13 @@ class ItemDetailsActivity : AppCompatActivity() {
 
     fun filterAttributeById(valueId: String, lvProductInfo: List<Attribute>): List<Attribute> {
         return lvProductInfo.filter { s -> s.valueId != valueId }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        android.R.id.home -> {
+            onBackPressed()
+            true
+        }
+        else -> false
     }
 }
