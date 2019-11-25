@@ -1,6 +1,7 @@
 package com.example.milachallenge.presentation.itemSelected
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,10 +22,14 @@ class ItemDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_details)
         rvProductInfo = findViewById(R.id.rv_product_info)
+        var soldProduct : String
         val intent = intent
         val productJson = intent.getStringExtra("PRODUCT")
         val gson = Gson()
         product = gson.fromJson(productJson, Product::class.java)
+        soldProduct = if(product?.soldQuantity!! > 1) getString(R.string.sold_more_than_one_product) else getString(R.string.sold_one_product)
+        tv_sold_products.text = String.format( soldProduct, product?.soldQuantity.toString())
+        tv_sold_products.visibility = if(product?.soldQuantity!! > 0) View.VISIBLE else View.GONE
         tv_title_product_detail.text = product?.title
         tv_price_product_detail.text =
             String.format(getString(R.string.price), product?.price.toString())
