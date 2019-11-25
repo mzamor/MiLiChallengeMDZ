@@ -1,10 +1,13 @@
 package com.example.milichallenge.presentation.main.view
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.text.InputType
 import android.view.Menu
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -32,6 +35,7 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
     private var visibleThreshold = 5
     private var pagingNumber = 0
     private var myQuery = ""
+    private var isConnected =true
     private val productAdapter: ProductsAdapter by lazy {
         ProductsAdapter(this, object : ClickListener {
             override fun onClick(view: View, product: Product) {
@@ -59,17 +63,19 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
                 val visibleItemCount = linearLayoutManager.childCount
                 val totalItemCount = linearLayoutManager.itemCount
                 val firstVisible = linearLayoutManager.findFirstVisibleItemPosition()
-                if (isLoading) {
-                    if (previousTotal < totalItemCount) {
-                        isLoading = false
-                        previousTotal = totalItemCount
+                if(isConnected()) {
+                    if (isLoading) {
+                        if (previousTotal < totalItemCount) {
+                            isLoading = false
+                            previousTotal = totalItemCount
+                        }
                     }
-                }
 
-                if (!isLoading && (firstVisible + visibleThreshold) >= totalItemCount - visibleItemCount) {
-                    pagingNumber += paginationStepNumber
-                    isLoading = true
-                    presenter.queryProducts(siteQuery , myQuery, pagingNumber)
+                    if (!isLoading && (firstVisible + visibleThreshold) >= totalItemCount - visibleItemCount) {
+                        pagingNumber += paginationStepNumber
+                        isLoading = true
+                        presenter.queryProducts(siteQuery, myQuery, pagingNumber)
+                    }
                 }
             }
         })
@@ -113,7 +119,9 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
     override fun onQueryTextSubmit(query: String?): Boolean {
         myQuery = query!!
         productAdapter.clear()
-        presenter.queryProducts(siteQuery, query, pagingNumber)
+        if(isConnected()) {
+            presenter.queryProducts(siteQuery, query, pagingNumber)
+        }
         return false
     }
 
@@ -127,9 +135,26 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
         svProductsMenu = menu?.findItem(R.id.app_bar_search)?.actionView as SearchView
         svProductsMenu?.inputType =
             InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS
+        svProductsMenu?.onActionViewExpanded()
+        svProductsMenu?.queryHint = "Buscar en Mercado Libre"
         svProductsMenu?.setOnQueryTextListener(this)
         return true
     }
+
+    fun isConnected():Boolean{
+        val manager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = manager.activeNetworkInfo
+        if(activeNetwork==null){
+            Toast.makeText(this,"No Internet Connection",Toast.LENGTH_SHORT).show()
+            tv_no_connection.visibility = View.VISIBLE
+            isConnected = false
+        }else{
+            tv_no_connection.visibility = View.GONE
+            isConnected = true
+        }
+        return isConnected
+    }
+
 
     override fun showProgressBar() {
         pb_products.visibility = View.VISIBLE
