@@ -12,6 +12,8 @@ data class Product(
     val seller: Seller,
     @SerializedName("price")
     val price: Double,
+    @SerializedName("original_price")
+    val originalPrice: Double,
     @SerializedName("currency_id")
     val currencyId: String,
     @SerializedName("available_quantity")
