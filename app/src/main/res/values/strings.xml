@@ -10,6 +10,7 @@
     <string name="sold_one_product">%s vendido</string>
     <string name="sold_more_than_one_product">%s vendidos</string>
     <string name="bar_separator">| %s</string>
+    <string name="sold_it_by">Vendido por %s</string>
     <string name="item_status">2230284</string>
     <string name="no_connection">Parece que no hay internet! \n Intente realizar una nueva busqueda en unos minutos</string>
 </resources>

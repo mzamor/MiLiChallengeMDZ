@@ -74,6 +74,19 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_x20" />
 
+        <ProgressBar
+            android:id="@+id/pb_item_details"
+            android:layout_width="@dimen/margin_x50"
+            android:layout_height="@dimen/margin_x50"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/tv_sold_it_by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_x20"
+            android:textSize="@dimen/comments_number_product_list"/>
+
         <TextView
             android:id="@+id/tv_title_product_info"
             android:layout_width="wrap_content"

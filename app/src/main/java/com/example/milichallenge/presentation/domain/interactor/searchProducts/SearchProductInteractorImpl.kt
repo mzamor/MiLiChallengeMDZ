@@ -20,7 +20,8 @@ class SearchProductInteractorImpl : SearchProductInteractor {
         val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
             .baseUrl(urlBase).build()
         val service = retrofit.create(SearchServices::class.java)
-        val call = service.getSearchProducts(site, productSearch, pagingNumber.toString(), limitSearch)
+        val call =
+            service.getSearchProducts(site, productSearch, pagingNumber.toString(), limitSearch)
         call.enqueue(object : Callback<ResultSearch> {
             override fun onResponse(call: Call<ResultSearch>, response: Response<ResultSearch>) {
                 val resultSearch: ResultSearch = response.body()!!

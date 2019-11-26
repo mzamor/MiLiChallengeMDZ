@@ -35,7 +35,7 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
     private var visibleThreshold = 5
     private var pagingNumber = 0
     private var myQuery = ""
-    private var isConnected =true
+    private var isConnected = true
     private val productAdapter: ProductsAdapter by lazy {
         ProductsAdapter(this, object : ClickListener {
             override fun onClick(view: View, product: Product) {
@@ -63,7 +63,7 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
                 val visibleItemCount = linearLayoutManager.childCount
                 val totalItemCount = linearLayoutManager.itemCount
                 val firstVisible = linearLayoutManager.findFirstVisibleItemPosition()
-                if(isConnected()) {
+                if (isConnected()) {
                     if (isLoading) {
                         if (previousTotal < totalItemCount) {
                             isLoading = false
@@ -119,7 +119,7 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
     override fun onQueryTextSubmit(query: String?): Boolean {
         myQuery = query!!
         productAdapter.clear()
-        if(isConnected()) {
+        if (isConnected()) {
             presenter.queryProducts(siteQuery, query, pagingNumber)
         }
         return false
@@ -140,14 +140,14 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
         return true
     }
 
-    fun isConnected():Boolean{
+    fun isConnected(): Boolean {
         val manager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = manager.activeNetworkInfo
-        if(activeNetwork==null){
-            Toast.makeText(this,"No Internet Connection",Toast.LENGTH_SHORT).show()
+        if (activeNetwork == null) {
+            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show()
             tv_no_connection.visibility = View.VISIBLE
             isConnected = false
-        }else{
+        } else {
             tv_no_connection.visibility = View.GONE
             isConnected = true
         }

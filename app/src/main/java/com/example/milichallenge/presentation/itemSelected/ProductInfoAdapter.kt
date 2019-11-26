@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.milachallenge.presentation.main.adapter.model.Attribute
 import com.example.milichallenge.R
-import kotlinx.android.synthetic.main.activity_item_details.view.*
 import kotlinx.android.synthetic.main.row_product_info.view.*
 
 class ProductInfoAdapter(context: Context, attributes: List<Attribute>) :
