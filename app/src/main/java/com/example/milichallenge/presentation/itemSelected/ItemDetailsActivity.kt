@@ -23,6 +23,7 @@ class ItemDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_details)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.title = getString(R.string.product)
         rvProductInfo = findViewById(R.id.rv_product_info)
         var soldProduct : String
         val intent = intent
