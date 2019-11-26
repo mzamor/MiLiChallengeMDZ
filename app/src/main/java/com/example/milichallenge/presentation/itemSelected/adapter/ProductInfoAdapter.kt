@@ -1,4 +1,4 @@
-package com.example.milichallenge.presentation.itemSelected
+package com.example.milichallenge.presentation.itemSelected.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -21,7 +21,7 @@ class ProductInfoAdapter(context: Context, attributes: List<Attribute>) :
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductInfoHolder {
-        return ProductInfoAdapter.ProductInfoHolder(
+        return ProductInfoHolder(
             LayoutInflater.from(myContext).inflate(
                 R.layout.row_product_info,
                 parent,

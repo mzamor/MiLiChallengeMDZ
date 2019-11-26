@@ -17,6 +17,11 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="productPriceDetail" parent="android:style/Widget.TextView">
+        <item name="android:textSize">@dimen/price_product_detail</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <style name="freeShippingList" parent="android:style/Widget.TextView">
         <item name="android:textSize">@dimen/free_shipping_product_list</item>
         <item name="android:textColor">@color/green</item>

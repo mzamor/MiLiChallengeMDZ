@@ -21,7 +21,7 @@
             android:id="@+id/tv_new_products"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_x20"
+            android:layout_marginBottom="@dimen/margin_x10"
             android:layout_marginRight="@dimen/margin_x5"/>
         <TextView
             android:id="@+id/tv_sold_products"
@@ -34,13 +34,13 @@
             android:id="@+id/tv_title_product_detail"
             style="@style/productTitleList"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_x5" />
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/margin_x5">
 
             <RatingBar
                 android:id="@+id/rb_stars_number_detail"
@@ -69,7 +69,7 @@
 
         <TextView
             android:id="@+id/tv_price_product_detail"
-            style="@style/productPriceList"
+            style="@style/productPriceDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_x20" />

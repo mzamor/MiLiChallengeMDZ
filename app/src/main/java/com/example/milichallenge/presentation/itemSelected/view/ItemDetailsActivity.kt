@@ -13,7 +13,7 @@ import com.example.milachallenge.presentation.main.adapter.model.Product
 import com.example.milichallenge.R
 import com.example.milichallenge.presentation.domain.interactor.searchProducts.SearchSellerInfoInteractorImpl
 import com.example.milichallenge.presentation.itemSelected.Model.SellerData
-import com.example.milichallenge.presentation.itemSelected.ProductInfoAdapter
+import com.example.milichallenge.presentation.itemSelected.adapter.ProductInfoAdapter
 import com.example.milichallenge.presentation.itemSelected.presenter.ItemDetailsPresenter
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
@@ -72,10 +72,11 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvProductInfo?.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
         rvProductInfo?.isNestedScrollingEnabled = false;
-        rvProductInfo?.adapter = ProductInfoAdapter(
-            this,
-            filterAttributeById(getString(R.string.item_status), product?.attributes!!)
-        )
+        rvProductInfo?.adapter =
+            ProductInfoAdapter(
+                this,
+                filterAttributeById(getString(R.string.item_status), product?.attributes!!)
+            )
     }
 
     fun filterAttributeById(valueId: String, lvProductInfo: List<Attribute>): List<Attribute> {

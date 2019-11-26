@@ -19,6 +19,7 @@ import com.example.milachallenge.presentation.main.adapter.model.Product
 import com.example.milachallenge.presentation.main.presenter.MainPresenter
 import com.example.milichallenge.R
 import com.example.milichallenge.presentation.domain.interactor.searchProducts.SearchProductInteractorImpl
+import com.example.milichallenge.presentation.main.adapter.ProductsAdapter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
@@ -37,11 +38,13 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
     private var myQuery = ""
     private var isConnected = true
     private val productAdapter: ProductsAdapter by lazy {
-        ProductsAdapter(this, object : ClickListener {
-            override fun onClick(view: View, product: Product) {
-                navigateToItemDetails(view, product)
-            }
-        })
+        ProductsAdapter(
+            this,
+            object : ClickListener {
+                override fun onClick(view: View, product: Product) {
+                    navigateToItemDetails(view, product)
+                }
+            })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

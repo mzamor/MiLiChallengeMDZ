@@ -1,4 +1,4 @@
-package com.example.milichallenge.presentation.main.view
+package com.example.milichallenge.presentation.main.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.milachallenge.presentation.main.adapter.model.Product
 import com.example.milichallenge.R
+import com.example.milichallenge.presentation.main.view.ClickListener
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_product_list.view.*
 import kotlin.math.roundToInt
