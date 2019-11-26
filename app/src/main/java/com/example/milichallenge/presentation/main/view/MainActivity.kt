@@ -53,10 +53,15 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
         rvProducts = findViewById(R.id.rv_products)
         presenter = MainPresenter(SearchProductInteractorImpl())
         presenter.attachView(this)
-        val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         if (savedInstanceState == null) {
             resultsProducts = ArrayList<Product>()
         }
+        bindItems()
+
+    }
+
+    fun bindItems(){
+        val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvProducts?.layoutManager = linearLayoutManager
         rvProducts?.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
         rvProducts?.adapter = productAdapter

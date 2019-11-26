@@ -36,6 +36,13 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.title = getString(R.string.product)
         rvProductInfo = findViewById(R.id.rv_product_info)
+        bindDetails()
+        productInfo()
+        itemDetailsPresenter?.querySellerInfo(siteQuery, product?.seller?.id!!)
+    }
+
+
+    fun bindDetails(){
         var soldProduct: String
         val intent = intent
         val productJson = intent.getStringExtra("PRODUCT")
@@ -43,29 +50,24 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         product = gson.fromJson(productJson, Product::class.java)
         itemDetailsPresenter = ItemDetailsPresenter(SearchSellerInfoInteractorImpl())
         itemDetailsPresenter.attachView(this)
-        tv_new_products.text =
-            if (product?.condition != null && product?.condition.toString().equals("new")) getText(R.string.new_product) else ""
-        tv_new_products.visibility =
-            if (tv_new_products.text.isNotEmpty()) View.VISIBLE else View.GONE
+        tv_new_products.text = if (product?.condition != null && product?.condition.toString().equals("new")) getText(R.string.new_product) else ""
+        tv_new_products.visibility = if (tv_new_products.text.isNotEmpty()) View.VISIBLE else View.GONE
         soldProduct =
             if (product?.soldQuantity!! > 1) getString(R.string.sold_more_than_one_product) else getString(
                 R.string.sold_one_product
             )
         tv_sold_products.text = String.format(soldProduct, product?.soldQuantity.toString())
         tv_sold_products.text = if (tv_new_products.text.isNotEmpty()) String.format(
-            getString(R.string.bar_separator),
-            tv_sold_products.text
+            getString(R.string.bar_separator), tv_sold_products.text
         ) else String.format(soldProduct, product?.soldQuantity.toString())
         tv_sold_products.visibility = if (product?.soldQuantity!! > 0) View.VISIBLE else View.GONE
         tv_title_product_detail.text = product?.title
         rb_stars_number_detail.setRating(product?.getStar()!!.toFloat())
         tv_comments_number_detail.text = product?.getCommentNumber().toString()
         Picasso.get().load(product?.thumbnail).into(iv_product_detail)
-        tv_price_product_detail.text =
-            String.format(getString(R.string.price), product?.price.toString())
-        productInfo()
-        itemDetailsPresenter?.querySellerInfo(siteQuery, product?.seller?.id!!)
+        tv_price_product_detail.text = String.format(getString(R.string.price), product?.price.toString())
     }
+
 
     fun productInfo() {
         rvProductInfo?.layoutManager =
