@@ -71,8 +71,7 @@ class ProductsAdapter(private val context: Context, var listener: ClickListener)
             var intPartPrice = product.price.toInt()
             itemView.tv_price.text = String.format(
                 context.getString(R.string.price),
-                if(product.price - intPartPrice.toDouble() > 0) product.price.toString() else intPartPrice.toString()
-            )
+                if(product.price - intPartPrice.toDouble() > 0) product.price.toString() else intPartPrice.toString())
             itemView.tv_sale.text = String.format(context.getString(R.string.sale_discount),
                 if(product.originalPrice > 0) percentDiscount(product.originalPrice, product.price) else " ")
             itemView.tv_sale.visibility = if(product.originalPrice > 0) VISIBLE else GONE

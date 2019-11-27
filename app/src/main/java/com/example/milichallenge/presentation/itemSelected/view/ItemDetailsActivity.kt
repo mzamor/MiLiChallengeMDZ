@@ -24,6 +24,7 @@ import android.text.SpannableString
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Build
+import kotlinx.android.synthetic.main.item_product_list.view.*
 
 
 class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailView {
@@ -68,16 +69,15 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         tv_comments_number_detail.text = product?.getCommentNumber().toString()
         Picasso.get().load(product?.thumbnail).into(iv_product_detail)
         tv_real_price_product_detail.text = String.format(getString(R.string.price_with_strike),product?.originalPrice.toString())
-
         tv_real_price_product_detail.paintFlags = tv_real_price_product_detail.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-
-        tv_price_product_detail.text = String.format(getString(R.string.price), product?.price.toString())
-
+        tv_real_price_product_detail.visibility = if(product?.originalPrice!! > 0) View.VISIBLE else View.GONE
+        var intPartPrice = product?.price?.toInt()
+        tv_price_product_detail.text = String.format(getString(R.string.price),
+            if(product?.price!! - intPartPrice!!.toDouble() > 0) product?.price.toString() else intPartPrice.toString())
         bt_quantity_products.setCompoundDrawables(null,null,resources.getDrawable(R.drawable.ic_navigate_next_black_24dp),null)
-
         bt_quantity_products.text = String.format(getString(R.string.quantity_product_selected),"1",if(product?.availableQuantity!! > 1) product?.availableQuantity.toString() else getString(R.string.last_product))
+        tv_mercado_puntos_product_detail.text = String.format(getString(R.string.mercado_puntos),(intPartPrice * 0.05).toInt().toString())
     }
-
 
     fun productInfo() {
         rvProductInfo?.layoutManager =
