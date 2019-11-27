@@ -12,14 +12,16 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
-    <style name="productPriceList" parent="android:style/Widget.TextView">
+    <style name="productPriceList" parent="productTitleList">
         <item name="android:textSize">@dimen/price_product_list</item>
-        <item name="android:textColor">@color/black</item>
     </style>
 
-    <style name="productPriceDetail" parent="android:style/Widget.TextView">
+    <style name="productPriceDetail" parent="productTitleList">
         <item name="android:textSize">@dimen/price_product_detail</item>
-        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="hasStockDetail" parent="productTitleList">
+        <item name="android:textSize">@dimen/has_stock_product_list</item>
     </style>
 
     <style name="freeShippingList" parent="android:style/Widget.TextView">
@@ -27,4 +29,12 @@
         <item name="android:textColor">@color/green</item>
     </style>
 
+    <style name="button_grey" parent = "@style/Widget.AppCompat.Button">
+        <item name="android:background">@color/LightGrey</item>
+        <item name="android:textAlignment">4</item>
+    </style>
+
+    <style name="button_blue" parent = "@style/Widget.AppCompat.Button.Colored">
+        <item name="android:background">@color/light_blue</item>
+    </style>
 </resources>

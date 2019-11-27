@@ -22,6 +22,7 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.text.SpannableString
 import android.graphics.Color
+import android.os.Build
 
 
 class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailView {
@@ -66,6 +67,10 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         tv_comments_number_detail.text = product?.getCommentNumber().toString()
         Picasso.get().load(product?.thumbnail).into(iv_product_detail)
         tv_price_product_detail.text = String.format(getString(R.string.price), product?.price.toString())
+
+            bt_quantity_products.setCompoundDrawables(null,null,resources.getDrawable(R.drawable.ic_navigate_next_black_24dp),null)
+
+        bt_quantity_products.text = String.format(getString(R.string.quantity_product_selected),"1",product?.availableQuantity.toString())
     }
 
 
@@ -73,7 +78,7 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         rvProductInfo?.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvProductInfo?.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-        rvProductInfo?.isNestedScrollingEnabled = false;
+        rvProductInfo?.isNestedScrollingEnabled = false
         rvProductInfo?.adapter =
             ProductInfoAdapter(
                 this,

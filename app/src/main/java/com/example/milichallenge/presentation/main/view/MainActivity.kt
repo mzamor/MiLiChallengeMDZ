@@ -56,11 +56,6 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
         if (savedInstanceState == null) {
             resultsProducts = ArrayList<Product>()
         }
-        bindItems()
-
-    }
-
-    fun bindItems(){
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvProducts?.layoutManager = linearLayoutManager
         rvProducts?.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
