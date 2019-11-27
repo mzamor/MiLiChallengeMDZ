@@ -130,6 +130,7 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
 
     override fun onQueryTextChange(newText: String?): Boolean {
         pagingNumber = 0
+        previousTotal = 0
         return false
     }
 

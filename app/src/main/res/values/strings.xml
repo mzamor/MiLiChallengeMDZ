@@ -3,6 +3,7 @@
     <string name="title_search_in_ml">Buscar en Mercado Libre</string>
     <string name="product_info">Información del producto</string>
     <string name="price">$ %s</string>
+    <string name="price_with_strike"><strike>$ %s</strike></string>
     <string name="sale_discount">%s%% OFF</string>
     <string name="free_shipping">Envío gratis</string>
     <string name="installments">Hasta %s cuotas sin interés</string>
