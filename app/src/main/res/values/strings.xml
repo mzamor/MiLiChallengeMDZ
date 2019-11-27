@@ -14,6 +14,7 @@
     <string name="sold_it_by">Vendido por %s</string>
     <string name="has_stock">Stock disponible</string>
     <string name="quantity_product_selected">Cantidad: %1$s (%2$s) </string>
+    <string name="last_product">¡Última disponible!</string>
     <string name="sell_product">Comprar</string>
     <string name="item_status">2230284</string>
     <string name="no_connection">Parece que no hay internet! \n Intente realizar una nueva busqueda en unos minutos</string>

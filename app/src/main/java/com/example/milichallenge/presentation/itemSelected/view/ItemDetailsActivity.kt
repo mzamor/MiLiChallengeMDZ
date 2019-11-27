@@ -70,7 +70,7 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
 
             bt_quantity_products.setCompoundDrawables(null,null,resources.getDrawable(R.drawable.ic_navigate_next_black_24dp),null)
 
-        bt_quantity_products.text = String.format(getString(R.string.quantity_product_selected),"1",product?.availableQuantity.toString())
+        bt_quantity_products.text = String.format(getString(R.string.quantity_product_selected),"1",if(product?.availableQuantity!! > 1) product?.availableQuantity.toString() else getString(R.string.last_product))
     }
 
 
