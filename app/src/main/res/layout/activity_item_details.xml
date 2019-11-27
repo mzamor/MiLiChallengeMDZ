@@ -142,7 +142,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_x20"
             android:textSize="@dimen/comments_number_product_list"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
         <Button
             android:id="@+id/bt_quantity_products"
