@@ -72,8 +72,9 @@ class ProductsAdapter(private val context: Context, var listener: ClickListener)
                 context.getString(R.string.price),
                 product.price.roundToInt().toString()
             )
-            itemView.tv_sale.text = if(product.originalPrice!=null) percentDiscount(product.originalPrice, product.price) else " "
-            itemView.tv_sale.visibility = if(product.originalPrice!=null) VISIBLE else GONE
+            itemView.tv_sale.text = String.format(context.getString(R.string.sale_discount),
+                if(product.originalPrice > 0) percentDiscount(product.originalPrice, product.price) else " ")
+            itemView.tv_sale.visibility = if(product.originalPrice > 0) VISIBLE else GONE
             if (product.installments != null) {
                 itemView.tv_installments.text = String.format(
                     context.getString(R.string.installments),

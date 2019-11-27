@@ -57,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_x5"
                 android:gravity="center"
+                android:text="123"
                 android:textSize="@dimen/comments_number_product_list" />
         </LinearLayout>
 
@@ -97,10 +98,10 @@
 
         <Button
             android:id="@+id/bt_quantity_products"
-            style="@style/button_grey"
+            style="@style/Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/quantity_product_selected" />
+            android:text="@string/quantity_product_selected"/>
 
         <Button
             android:id="@+id/bt_sell_product"
