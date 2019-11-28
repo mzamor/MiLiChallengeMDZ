@@ -76,13 +76,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/margin_x10">
         <TextView
             android:id="@+id/tv_price_product_detail"
             style="@style/productPriceDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_x10"/>
+           />
 
+            <TextView
+                android:id="@+id/tv_sale_discount_product_detail"
+                style="@style/freeShippingList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_x10"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"/>
+
+        </LinearLayout>
         <TextView
             android:id="@+id/tv_has_stock_product_detail"
             style="@style/hasStockDetail"
@@ -150,7 +165,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_x20"
-            android:text="@string/quantity_product_selected" />
+            android:text="@string/quantity_product_selected"
+            android:textAlignment="textStart"/>
 
         <Button
             android:id="@+id/bt_sell_product"
@@ -160,6 +176,18 @@
             android:layout_marginBottom="@dimen/margin_x30"
             android:text="@string/sell_product" />
 
+
+        <TextView
+            android:id="@+id/tv_protected_buy_product_detail"
+            style="@style/TextAppearance.AppCompat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_x20"
+            android:text="@string/protected_buy"
+            android:drawableLeft="@drawable/trophy"
+            android:drawablePadding="@dimen/margin_x10"
+            android:visibility="visible"
+            />
         <TextView
             android:id="@+id/tv_mercado_puntos_product_detail"
             style="@style/TextAppearance.AppCompat"

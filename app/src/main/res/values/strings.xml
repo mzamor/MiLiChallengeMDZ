@@ -17,9 +17,11 @@
     <string name="payment_way">Pagá en hasta 12 cuotas \nCon tu VISA terminada en 0001</string>
     <string name="shipping_way">Llega gratis mañana \ncomprando antes de las 15 hs.</string>
     <string name="take_away">Retiralo gratis a partir del viernes en \ncorreos y otros puntos</string>
-    <string name="quantity_product_selected">Cantidad: %1$s (%2$s) </string>
+    <string name="quantity_product_selected">Cantidad: %1$s   (%2$s) </string>
+    <string name="last_products">%s disponibles</string>
     <string name="last_product">¡Última disponible!</string>
     <string name="sell_product">Comprar</string>
+    <string name="protected_buy">Compra protegida</string>
     <string name="mercado_puntos">Sumás %s Mercados Puntos</string>
     <string name="item_status">2230284</string>
     <string name="no_connection">Parece que no hay internet! \n Intente realizar una nueva busqueda en unos minutos</string>

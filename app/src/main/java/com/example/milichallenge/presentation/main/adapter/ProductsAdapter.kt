@@ -94,6 +94,4 @@ class ProductsAdapter(private val context: Context, var listener: ClickListener)
             return  (100 - (price*100/originalPrice).toInt()).toString()
         }
     }
-
-
 }
