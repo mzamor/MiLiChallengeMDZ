@@ -12,7 +12,6 @@ import com.example.milichallenge.R
 import com.example.milichallenge.presentation.main.view.ClickListener
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_product_list.view.*
-import kotlin.math.roundToInt
 
 class ProductsAdapter(private val context: Context, var listener: ClickListener) :
     RecyclerView.Adapter<ProductsAdapter.ProductsHolder>() {
@@ -68,13 +67,16 @@ class ProductsAdapter(private val context: Context, var listener: ClickListener)
         fun bind(context: Context, product: Product, listener: ClickListener) {
             Picasso.get().load(product.thumbnail).into(itemView.iv_product)
             itemView.tv_title.text = product.title
-            var intPartPrice = product.price.toInt()
             itemView.tv_price.text = String.format(
                 context.getString(R.string.price),
-                if(product.price - intPartPrice.toDouble() > 0) product.price.toString() else intPartPrice.toString())
-            itemView.tv_sale.text = String.format(context.getString(R.string.sale_discount),
-                if(product.originalPrice > 0) percentDiscount(product.originalPrice, product.price) else " ")
-            itemView.tv_sale.visibility = if(product.originalPrice > 0) VISIBLE else GONE
+                getDoubleValueIfHasDecimals(product.price)
+            )
+            itemView.tv_sale.text = String.format(
+                context.getString(R.string.sale_discount),
+                getDiscountIfHasSale(product.originalPrice, product.price)
+            )
+            itemView.tv_sale.visibility = if (product.originalPrice > 0) VISIBLE else GONE
+
             if (product.installments != null) {
                 itemView.tv_installments.text = String.format(
                     context.getString(R.string.installments),
@@ -90,8 +92,21 @@ class ProductsAdapter(private val context: Context, var listener: ClickListener)
             })
         }
 
-        fun percentDiscount(originalPrice : Double, price : Double): String{
-            return  (100 - (price*100/originalPrice).toInt()).toString()
+        fun percentDiscount(originalPrice: Double, price: Double): String {
+            return (100 - (price * 100 / originalPrice).toInt()).toString()
+        }
+
+        fun hasDecimal(value: Double): Boolean {
+            var intPartPrice = value.toInt()
+            return (value - intPartPrice.toDouble()) > 0
+        }
+
+        fun getDoubleValueIfHasDecimals(value: Double): String {
+            return if (hasDecimal(value)) value.toString() else value.toInt().toString()
+        }
+
+        fun getDiscountIfHasSale(originalPrice: Double, price: Double): String {
+            return if (originalPrice > 0) percentDiscount(originalPrice, price) else " "
         }
     }
 }
