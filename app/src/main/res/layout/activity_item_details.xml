@@ -165,7 +165,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_x20"
             android:text="@string/quantity_product_selected"
-            android:textAlignment="textStart"/>
+            android:textAlignment="textStart"
+            android:padding="@dimen/margin_x10"
+            android:drawableRight="@drawable/ic_navigate_next_black_24dp"/>
 
         <Button
             android:id="@+id/bt_sell_product"

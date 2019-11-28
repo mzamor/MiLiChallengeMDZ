@@ -99,18 +99,6 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
             if(product?.availableQuantity!! > 1) String.format(getString(R.string.last_products), product?.availableQuantity.toString()) else getString(R.string.last_product))
     }
 
-    fun productInfo() {
-        rvProductInfo?.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rvProductInfo?.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-        rvProductInfo?.isNestedScrollingEnabled = false
-        rvProductInfo?.adapter =
-            ProductInfoAdapter(
-                this,
-                filterAttributeById(getString(R.string.item_status), product?.attributes!!)
-            )
-    }
-
     fun filterAttributeById(valueId: String, lvProductInfo: List<Attribute>): List<Attribute> {
         return lvProductInfo.filter { s -> s.valueId != valueId }
     }
@@ -145,5 +133,17 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
 
     fun calculateMercadoPuntos(value:Double):String{
         return (value.toInt() * 0.05).toInt().toString()
+    }
+
+    fun productInfo() {
+        rvProductInfo?.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvProductInfo?.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+        rvProductInfo?.isNestedScrollingEnabled = false
+        rvProductInfo?.adapter =
+            ProductInfoAdapter(
+                this,
+                filterAttributeById(getString(R.string.item_status), product?.attributes!!)
+            )
     }
 }

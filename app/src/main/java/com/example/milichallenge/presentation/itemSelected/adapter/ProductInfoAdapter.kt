@@ -44,8 +44,8 @@ class ProductInfoAdapter(context: Context, attributes: List<Attribute>) :
         fun bind(context: Context, attribute: Attribute?, position: Int) {
             itemView.tv_info_product_name.text = attribute?.name
             itemView.tv_info_product_value.text = attribute?.valueName
-            itemView.tv_info_product_name.setBackgroundResource(if (position % 2 != 0) R.color.LightGrey else R.color.gray)
-            itemView.tv_info_product_value.setBackgroundResource(if (position % 2 != 0) R.color.white else R.color.LightGrey)
+            itemView.tv_info_product_name.setBackgroundResource(if (position % 2 != 0) R.color.grey_table_light else R.color.grey_table_dark)
+            itemView.tv_info_product_value.setBackgroundResource(if (position % 2 != 0) R.color.grey_table_ultra_light else R.color.grey_table_light)
         }
     }
 
