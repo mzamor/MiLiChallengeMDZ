@@ -32,6 +32,7 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
     private var product: Product? = null
     var rvProductInfo: RecyclerView? = null
     private val siteQuery = "MLA"
+    var soldProduct: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +47,6 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
 
 
     fun bindDetails(){
-        var soldProduct: String
         val intent = intent
         val productJson = intent.getStringExtra("PRODUCT")
         val gson = Gson()
@@ -55,6 +55,16 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         itemDetailsPresenter.attachView(this)
         tv_new_products.text = if (product?.condition != null && product?.condition.toString() == "new") getText(R.string.new_product) else ""
         tv_new_products.visibility = if (tv_new_products.text.isNotEmpty()) View.VISIBLE else View.GONE
+        setQuantitySoldProducts()
+        tv_title_product_detail.text = product?.title
+        setCommentAndRankin()
+        Picasso.get().load(product?.thumbnail).into(iv_product_detail)
+        setPrices()
+        setQuantityAvailableProducts()
+        tv_mercado_puntos_product_detail.text = String.format(getString(R.string.mercado_puntos), calculateMercadoPuntos(product?.price!!))
+    }
+
+    fun setQuantitySoldProducts(){
         soldProduct =
             if (product?.soldQuantity!! > 1) getString(R.string.sold_more_than_one_product) else getString(
                 R.string.sold_one_product
@@ -64,10 +74,14 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
             getString(R.string.bar_separator), tv_sold_products.text
         ) else String.format(soldProduct, product?.soldQuantity.toString())
         tv_sold_products.visibility = if (product?.soldQuantity!! > 0) View.VISIBLE else View.GONE
-        tv_title_product_detail.text = product?.title
+    }
+
+    fun setCommentAndRankin(){
         rb_stars_number_detail.setRating(product?.getStar()!!.toFloat())
         tv_comments_number_detail.text = product?.getCommentNumber().toString()
-        Picasso.get().load(product?.thumbnail).into(iv_product_detail)
+    }
+
+    fun setPrices(){
         tv_sale_discount_product_detail.text = String.format(getString(R.string.price_with_strike),product?.originalPrice.toString())
         tv_sale_discount_product_detail.paintFlags = tv_real_price_product_detail.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         tv_sale_discount_product_detail.visibility = if(product?.originalPrice!! > 0) View.VISIBLE else View.GONE
@@ -77,10 +91,12 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         tv_sale_discount_product_detail.text = String.format(getString(R.string.sale_discount),
             if(product?.originalPrice!! > 0) percentDiscount(product?.originalPrice!!, product?.price!!) else " ")
         tv_sale_discount_product_detail.visibility = if(product?.originalPrice!! > 0) View.VISIBLE else View.GONE
+    }
+
+    fun setQuantityAvailableProducts(){
         bt_quantity_products.setCompoundDrawables(null,null,resources.getDrawable(R.drawable.ic_navigate_next_black_24dp),null)
         bt_quantity_products.text = String.format(getString(R.string.quantity_product_selected),"1",
             if(product?.availableQuantity!! > 1) String.format(getString(R.string.last_products), product?.availableQuantity.toString()) else getString(R.string.last_product))
-        tv_mercado_puntos_product_detail.text = String.format(getString(R.string.mercado_puntos), calculateMercadoPuntos(product?.price!!))
     }
 
     fun productInfo() {
@@ -93,7 +109,6 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
                 this,
                 filterAttributeById(getString(R.string.item_status), product?.attributes!!)
             )
-
     }
 
     fun filterAttributeById(valueId: String, lvProductInfo: List<Attribute>): List<Attribute> {
