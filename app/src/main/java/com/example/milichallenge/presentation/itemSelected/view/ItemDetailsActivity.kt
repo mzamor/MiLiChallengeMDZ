@@ -53,7 +53,7 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         product = gson.fromJson(productJson, Product::class.java)
         itemDetailsPresenter = ItemDetailsPresenter(SearchSellerInfoInteractorImpl())
         itemDetailsPresenter.attachView(this)
-        tv_new_products.text = if (product?.condition != null && product?.condition.toString().equals("new")) getText(R.string.new_product) else ""
+        tv_new_products.text = if (product?.condition != null && product?.condition.toString() == "new") getText(R.string.new_product) else ""
         tv_new_products.visibility = if (tv_new_products.text.isNotEmpty()) View.VISIBLE else View.GONE
         soldProduct =
             if (product?.soldQuantity!! > 1) getString(R.string.sold_more_than_one_product) else getString(
@@ -80,7 +80,7 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         bt_quantity_products.setCompoundDrawables(null,null,resources.getDrawable(R.drawable.ic_navigate_next_black_24dp),null)
         bt_quantity_products.text = String.format(getString(R.string.quantity_product_selected),"1",
             if(product?.availableQuantity!! > 1) String.format(getString(R.string.last_products), product?.availableQuantity.toString()) else getString(R.string.last_product))
-        tv_mercado_puntos_product_detail.text = String.format(getString(R.string.mercado_puntos),(intPartPrice * 0.05).toInt().toString())
+        tv_mercado_puntos_product_detail.text = String.format(getString(R.string.mercado_puntos), calculateMercadoPuntos(product?.price!!))
     }
 
     fun productInfo() {
@@ -128,4 +128,7 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         return  (100 - (price*100/originalPrice).toInt()).toString()
     }
 
+    fun calculateMercadoPuntos(value:Double):String{
+        return (value.toInt() * 0.05).toInt().toString()
+    }
 }
