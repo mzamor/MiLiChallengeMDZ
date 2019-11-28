@@ -68,9 +68,9 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         rb_stars_number_detail.setRating(product?.getStar()!!.toFloat())
         tv_comments_number_detail.text = product?.getCommentNumber().toString()
         Picasso.get().load(product?.thumbnail).into(iv_product_detail)
-        tv_real_price_product_detail.text = String.format(getString(R.string.price_with_strike),product?.originalPrice.toString())
-        tv_real_price_product_detail.paintFlags = tv_real_price_product_detail.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-        tv_real_price_product_detail.visibility = if(product?.originalPrice!! > 0) View.VISIBLE else View.GONE
+        tv_sale_discount_product_detail.text = String.format(getString(R.string.price_with_strike),product?.originalPrice.toString())
+        tv_sale_discount_product_detail.paintFlags = tv_real_price_product_detail.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        tv_sale_discount_product_detail.visibility = if(product?.originalPrice!! > 0) View.VISIBLE else View.GONE
         var intPartPrice = product?.price?.toInt()
         tv_price_product_detail.text = String.format(getString(R.string.price),
             if(product?.price!! - intPartPrice!!.toDouble() > 0) product?.price.toString() else intPartPrice.toString())

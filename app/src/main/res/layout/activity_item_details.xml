@@ -141,8 +141,7 @@
             android:text="@string/take_away"
             android:drawableLeft="@drawable/trophy"
             android:drawablePadding="@dimen/margin_x10"
-            android:visibility="visible"
-            />
+            android:visibility="visible" />
 
         <ProgressBar
             android:id="@+id/pb_item_details"
