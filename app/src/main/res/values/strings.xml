@@ -20,9 +20,22 @@
     <string name="quantity_product_selected">Cantidad: %1$s   (%2$s) </string>
     <string name="last_products">%s disponibles</string>
     <string name="last_product">¡Última disponible!</string>
+    <string name="choose_product_quantity"><b>Elegí cantidad</b></string>
     <string name="sell_product">Comprar ahora</string>
     <string name="protected_buy">Compra protegida, recibí el producto que esperabas o te devolvemos tu dinero.</string>
     <string name="mercado_puntos">Sumás %s Mercados Puntos.</string>
     <string name="item_status">2230284</string>
     <string name="no_connection">Parece que no hay internet! \n Intente realizar una nueva busqueda en unos minutos</string>
+
+    <string-array
+        name="string_array_product_quantity">
+        <item>"1 unidad"</item>
+        <item>"2 unidades"</item>
+        <item>"3 unidades"</item>
+        <item>"4 unidades"</item>
+        <item>"5 unidades"</item>
+        <item>"6 unidades"</item>
+        <item>"Más de 6 unidades"</item>
+    </string-array>
+
 </resources>

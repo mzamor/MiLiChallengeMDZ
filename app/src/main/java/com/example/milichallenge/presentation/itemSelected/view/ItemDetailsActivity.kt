@@ -1,5 +1,6 @@
 package com.example.milachallenge.presentation.itemSelected
 
+import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -24,6 +25,8 @@ import android.text.SpannableString
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Build
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.item_product_list.view.*
 
 
@@ -33,6 +36,8 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
     var rvProductInfo: RecyclerView? = null
     private val siteQuery = "MLA"
     var soldProduct: String = ""
+    var builder : AlertDialog.Builder? = null
+    var array : Array<String>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,23 +51,31 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
     }
 
 
-    fun bindDetails(){
+    fun bindDetails() {
         val intent = intent
         val productJson = intent.getStringExtra("PRODUCT")
         val gson = Gson()
         product = gson.fromJson(productJson, Product::class.java)
         itemDetailsPresenter = ItemDetailsPresenter(SearchSellerInfoInteractorImpl())
         itemDetailsPresenter.attachView(this)
-        tv_new_products.text = if (product?.condition != null && product?.condition.toString() == "new") getText(R.string.new_product) else ""
-        tv_new_products.visibility = if (tv_new_products.text.isNotEmpty()) View.VISIBLE else View.GONE
+        tv_new_products.text =
+            if (product?.condition != null && product?.condition.toString() == "new") getText(R.string.new_product) else ""
+        tv_new_products.visibility =
+            if (tv_new_products.text.isNotEmpty()) View.VISIBLE else View.GONE
         setQuantitySoldProducts()
         tv_title_product_detail.text = product?.title
         setCommentAndRankin()
         Picasso.get().load(product?.thumbnail).into(iv_product_detail)
         setPrices()
         setQuantityAvailableProducts()
-        tv_mercado_puntos_product_detail.text = String.format(getString(R.string.mercado_puntos), calculateMercadoPuntos(product?.price!!))
+        tv_mercado_puntos_product_detail.text = String.format(
+            getString(R.string.mercado_puntos),
+            calculateMercadoPuntos(product?.price!!)
+        )
+
+
     }
+
 
     fun setQuantitySoldProducts(){
         soldProduct =
@@ -97,6 +110,10 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
     fun setQuantityAvailableProducts(){
         bt_quantity_products.text = String.format(getString(R.string.quantity_product_selected),"1",
             if(product?.availableQuantity!! > 1) String.format(getString(R.string.last_products), product?.availableQuantity.toString()) else getString(R.string.last_product))
+
+        bt_quantity_products.setOnClickListener{
+            showDialog()
+        }
     }
 
     fun filterAttributeById(valueId: String, lvProductInfo: List<Attribute>): List<Attribute> {
@@ -146,4 +163,29 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
                 filterAttributeById(getString(R.string.item_status), product?.attributes!!)
             )
     }
+
+    private fun showDialog(){
+        array = resources.getStringArray(R.array.string_array_product_quantity)
+        builder = AlertDialog.Builder(this)
+
+        builder?.setTitle(resources.getString(R.string.choose_product_quantity))
+
+        builder?.setItems(array,{_, which ->
+            val selected = array!![which]
+
+            try {
+
+            }catch (e:IllegalArgumentException){
+
+            }
+        })
+
+        val dialog = builder?.create()
+        dialog?.show()
+    }
+
+
+
 }
+
+
