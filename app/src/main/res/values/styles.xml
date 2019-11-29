@@ -31,16 +31,18 @@
     </style>
 
     <style name="freeShippingList" parent="android:style/Widget.TextView">
+        <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/free_shipping_product_list</item>
         <item name="android:textColor">@color/green</item>
     </style>
 
-    <style name="button_grey" parent = "@style/Widget.AppCompat.Button">
-        <item name="android:background">@color/grey_table_ultra_light</item>
+    <style name="button_grey" parent = "@style/Widget.AppCompat.Button.Colored">
+        <item name="android:textAllCaps">false</item>
         <item name="android:textAlignment">4</item>
+        <item name="android:background">@drawable/btn_grey_rounded</item>
     </style>
 
     <style name="button_blue" parent = "@style/Widget.AppCompat.Button.Colored">
-        <item name="android:background">@color/light_blue</item>
+        <item name="android:background">@drawable/btn_blue_rounded</item>
     </style>
 </resources>

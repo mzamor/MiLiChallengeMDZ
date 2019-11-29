@@ -82,8 +82,9 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
     }
 
     fun setPrices(){
-        tv_sale_discount_product_detail.text = String.format(getString(R.string.price_with_strike),product?.originalPrice.toString())
-        tv_sale_discount_product_detail.paintFlags = tv_real_price_product_detail.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        tv_real_price_product_detail.text = String.format(getString(R.string.price_with_strike),product?.originalPrice.toString())
+        tv_real_price_product_detail.paintFlags = tv_real_price_product_detail.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        tv_real_price_product_detail.visibility =  if(product?.originalPrice!! > 0) View.VISIBLE else View.GONE
         tv_sale_discount_product_detail.visibility = if(product?.originalPrice!! > 0) View.VISIBLE else View.GONE
         var intPartPrice = product?.price?.toInt()
         tv_price_product_detail.text = String.format(getString(R.string.price),

@@ -4,6 +4,7 @@
     android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:padding="@dimen/margin_x10">
 
     <LinearLayout
@@ -126,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_x20"
             android:text="@string/shipping_way"
-            android:drawableLeft="@drawable/trophy"
+            android:drawableLeft="@drawable/delivery_truck"
             android:drawablePadding="@dimen/margin_x10"
             android:textColor="@color/green"
             android:visibility="visible"
@@ -160,23 +161,25 @@
 
         <Button
             android:id="@+id/bt_quantity_products"
-            style="@style/button_grey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/button_grey"
             android:layout_marginBottom="@dimen/margin_x20"
             android:text="@string/quantity_product_selected"
             android:textAlignment="textStart"
+            android:textAllCaps="false"
             android:padding="@dimen/margin_x10"
             android:drawableRight="@drawable/ic_navigate_next_black_24dp"/>
 
         <Button
             android:id="@+id/bt_sell_product"
-            style="@style/button_blue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/button_blue"
+            android:textAllCaps="false"
             android:layout_marginBottom="@dimen/margin_x30"
-            android:text="@string/sell_product" />
-
+            android:text="@string/sell_product"
+             />
 
         <TextView
             android:id="@+id/tv_protected_buy_product_detail"
@@ -185,7 +188,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_x20"
             android:text="@string/protected_buy"
-            android:drawableLeft="@drawable/trophy"
+            android:drawableLeft="@drawable/shield"
             android:drawablePadding="@dimen/margin_x10"
             android:visibility="visible"
             />
