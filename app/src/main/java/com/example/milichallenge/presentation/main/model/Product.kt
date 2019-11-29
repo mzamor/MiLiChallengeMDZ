@@ -20,6 +20,8 @@ data class Product(
     val availableQuantity: Integer,
     @SerializedName("sold_quantity")
     val soldQuantity: Integer,
+    @SerializedName("buying_mode")
+    val buyingMode: String,
     @SerializedName("condition")
     val condition: String,
     @SerializedName("thumbnail")

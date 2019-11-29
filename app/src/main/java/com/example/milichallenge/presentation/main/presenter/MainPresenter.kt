@@ -22,7 +22,7 @@ class MainPresenter(searchProductInteractor: SearchProductInteractor) : MainCont
                 override fun onSearchProductsSuccess(resultSearch: ResultSearch) {
                     if (isViewAttached()) {
                         view?.hideProgressBar()
-                        view?.showProductList(resultSearch.results)
+                        view?.showProductList(resultSearch.results.filter { it.buyingMode != "classified" })
                     }
                 }
 
