@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class Product(
+    @SerializedName("id")
+    val id: String,
     @SerializedName("site_id")
     val siteId: String,
     @SerializedName("title")

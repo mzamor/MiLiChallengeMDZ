@@ -25,8 +25,10 @@ import android.text.SpannableString
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Build
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.milichallenge.presentation.itemSelected.Model.ProductDescription
 import kotlinx.android.synthetic.main.item_product_list.view.*
 
 
@@ -48,6 +50,7 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         rvProductInfo = findViewById(R.id.rv_product_info)
         bindDetails()
         itemDetailsPresenter.querySellerInfo(siteQuery, product?.seller?.id!!)
+
         productInfo()
     }
 
@@ -74,8 +77,6 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
             getString(R.string.mercado_puntos),
             calculateMercadoPuntos(product?.price!!)
         )
-
-
     }
 
 
@@ -142,6 +143,11 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         ss1.setSpan(ForegroundColorSpan(resources.getColor(R.color.light_blue)), sizeTextSeller, ss1.length, 0)
         tv_sold_it_by.text = ss1
     }
+
+    override fun showProductDescription(result: ProductDescription) {
+        Log.e("description", result.description)
+    }
+
 
     override fun showProgressBar() {
         pb_item_details.visibility = View.VISIBLE
