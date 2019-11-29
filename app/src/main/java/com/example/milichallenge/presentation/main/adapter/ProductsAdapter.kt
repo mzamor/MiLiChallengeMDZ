@@ -68,7 +68,7 @@ class ProductsAdapter(private val context: Context, var listener: ClickListener)
             Picasso.get().load(product.thumbnail).into(itemView.iv_product)
             itemView.tv_title.text = product.title
             itemView.tv_price.text = String.format(
-                context.getString(R.string.price),
+                context.getString(R.string.price), product.currencyId,
                 getDoubleValueIfHasDecimals(product.price)
             )
             itemView.tv_sale.text = String.format(
@@ -82,9 +82,14 @@ class ProductsAdapter(private val context: Context, var listener: ClickListener)
                     context.getString(R.string.installments),
                     product.installments.quantity.toString()
                 )
-                itemView.tv_free_shipping.visibility =
-                    if (product.shipping.freeShipping) VISIBLE else GONE
+                itemView.tv_installments.visibility = VISIBLE
+
+            }else{
+                itemView.tv_installments.visibility = GONE
             }
+
+            itemView.tv_free_shipping.visibility =
+                if (product.shipping.freeShipping) VISIBLE else GONE
             itemView.rb_stars_number.setRating(product.getStar().toFloat())
             itemView.tv_comments_number.text = product.getCommentNumber().toString()
             itemView.setOnClickListener(View.OnClickListener {

@@ -87,7 +87,7 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         tv_real_price_product_detail.visibility =  if(product?.originalPrice!! > 0) View.VISIBLE else View.GONE
         tv_sale_discount_product_detail.visibility = if(product?.originalPrice!! > 0) View.VISIBLE else View.GONE
         var intPartPrice = product?.price?.toInt()
-        tv_price_product_detail.text = String.format(getString(R.string.price),
+        tv_price_product_detail.text = String.format(getString(R.string.price), product?.currencyId,
             if(product?.price!! - intPartPrice!!.toDouble() > 0) product?.price.toString() else intPartPrice.toString())
         tv_sale_discount_product_detail.text = String.format(getString(R.string.sale_discount),
             if(product?.originalPrice!! > 0) percentDiscount(product?.originalPrice!!, product?.price!!) else " ")
@@ -95,7 +95,6 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
     }
 
     fun setQuantityAvailableProducts(){
-        bt_quantity_products.setCompoundDrawables(null,null,resources.getDrawable(R.drawable.ic_navigate_next_black_24dp),null)
         bt_quantity_products.text = String.format(getString(R.string.quantity_product_selected),"1",
             if(product?.availableQuantity!! > 1) String.format(getString(R.string.last_products), product?.availableQuantity.toString()) else getString(R.string.last_product))
     }

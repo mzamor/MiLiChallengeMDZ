@@ -169,7 +169,7 @@
             android:textAlignment="textStart"
             android:textAllCaps="false"
             android:padding="@dimen/margin_x10"
-            android:drawableRight="@drawable/ic_navigate_next_black_24dp"/>
+            android:drawableEnd="@drawable/ic_navigate_next_black_24dp"/>
 
         <Button
             android:id="@+id/bt_sell_product"
