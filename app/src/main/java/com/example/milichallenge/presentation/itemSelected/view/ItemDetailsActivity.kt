@@ -38,6 +38,7 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
     var soldProduct: String = ""
     var builder : AlertDialog.Builder? = null
     var array : Array<String>? = null
+    var productQuantity : Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +65,8 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
             if (tv_new_products.text.isNotEmpty()) View.VISIBLE else View.GONE
         setQuantitySoldProducts()
         tv_title_product_detail.text = product?.title
-        setCommentAndRankin()
+        setCommentAndRanking()
+        setModePayment()
         Picasso.get().load(product?.thumbnail).into(iv_product_detail)
         setPrices()
         setQuantityAvailableProducts()
@@ -89,9 +91,13 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         tv_sold_products.visibility = if (product?.soldQuantity!! > 0) View.VISIBLE else View.GONE
     }
 
-    fun setCommentAndRankin(){
+    fun setCommentAndRanking(){
         rb_stars_number_detail.setRating(product?.getStar()!!.toFloat())
         tv_comments_number_detail.text = product?.getCommentNumber().toString()
+    }
+
+    fun setModePayment(){
+        tv_payment_way_product_detail.text = String.format(getString(R.string.payment_way), product?.installments?.quantity.toString())
     }
 
     fun setPrices(){
@@ -108,7 +114,7 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
     }
 
     fun setQuantityAvailableProducts(){
-        bt_quantity_products.text = String.format(getString(R.string.quantity_product_selected),"1",
+        bt_quantity_products.text = String.format(getString(R.string.quantity_product_selected),productQuantity.toString(),
             if(product?.availableQuantity!! > 1) String.format(getString(R.string.last_products), product?.availableQuantity.toString()) else getString(R.string.last_product))
 
         bt_quantity_products.setOnClickListener{
@@ -170,15 +176,14 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
 
         builder?.setTitle(resources.getString(R.string.choose_product_quantity))
 
-        builder?.setItems(array,{_, which ->
-            val selected = array!![which]
-
+        builder?.setItems(array) { _, which ->
+            productQuantity = which + 1
             try {
-
+                setQuantityAvailableProducts()
             }catch (e:IllegalArgumentException){
 
             }
-        })
+        }
 
         val dialog = builder?.create()
         dialog?.show()

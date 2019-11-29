@@ -14,7 +14,7 @@
     <string name="bar_separator">| %s</string>
     <string name="sold_it_by">Vendido por %s</string>
     <string name="has_stock">Stock disponible</string>
-    <string name="payment_way">Pagá en hasta 12 cuotas \nCon tu VISA terminada en 0001</string>
+    <string name="payment_way">Pagá en hasta %s cuotas \nCon tu VISA terminada en 0001</string>
     <string name="shipping_way">Llega gratis mañana \ncomprando antes de las 15 hs.</string>
     <string name="take_away">Retiralo gratis a partir del viernes en \ncorreos y otros puntos</string>
     <string name="quantity_product_selected">Cantidad: %1$s   (%2$s) </string>
