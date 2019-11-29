@@ -68,7 +68,7 @@ class ProductsAdapter(private val context: Context, var listener: ClickListener)
             Picasso.get().load(product.thumbnail).into(itemView.iv_product)
             itemView.tv_title.text = product.title
             itemView.tv_price.text = String.format(
-                context.getString(R.string.price), product.currencyId,
+                context.getString(R.string.price),
                 getDoubleValueIfHasDecimals(product.price)
             )
             itemView.tv_sale.text = String.format(

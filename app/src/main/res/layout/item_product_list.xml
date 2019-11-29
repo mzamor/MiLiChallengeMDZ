@@ -29,7 +29,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_x10"
+            android:layout_marginBottom="@dimen/margin_x10">
             <TextView
                 android:id="@+id/tv_price"
                 style="@style/productPriceList"
@@ -42,6 +44,7 @@
                 style="@style/freeShippingList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_x5"
                 android:visibility="gone"/>
 
         </LinearLayout>
@@ -51,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/installments"
+            android:layout_marginBottom="@dimen/margin_x5"
             android:visibility="gone" />
 
         <TextView

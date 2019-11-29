@@ -117,6 +117,7 @@
             android:drawableLeft="@drawable/payment"
             android:drawablePadding="@dimen/margin_x10"
             android:layout_marginBottom="@dimen/margin_x20"
+            android:textSize="@dimen/title_product_details"
             android:visibility="visible"
             />
 
@@ -130,6 +131,7 @@
             android:drawableLeft="@drawable/delivery_truck"
             android:drawablePadding="@dimen/margin_x10"
             android:textColor="@color/green"
+            android:textSize="@dimen/title_product_details"
             android:visibility="visible"
             />
 
@@ -142,6 +144,8 @@
             android:text="@string/take_away"
             android:drawableLeft="@drawable/trophy"
             android:drawablePadding="@dimen/margin_x10"
+            android:textColor="@color/green"
+            android:textSize="@dimen/title_product_details"
             android:visibility="visible" />
 
         <ProgressBar
@@ -156,7 +160,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_x20"
-            android:textSize="@dimen/comments_number_product_list"
+            android:textColor="@color/black"
+            android:textSize="@dimen/title_product_details"
             android:visibility="visible"/>
 
         <Button
@@ -168,8 +173,9 @@
             android:text="@string/quantity_product_selected"
             android:textAlignment="textStart"
             android:textAllCaps="false"
+            android:textSize="@dimen/title_product_details"
             android:padding="@dimen/margin_x10"
-            android:drawableEnd="@drawable/ic_navigate_next_black_24dp"/>
+           />
 
         <Button
             android:id="@+id/bt_sell_product"
@@ -177,6 +183,7 @@
             android:layout_height="wrap_content"
             style="@style/button_blue"
             android:textAllCaps="false"
+            android:textSize="@dimen/product_buy"
             android:layout_marginBottom="@dimen/margin_x30"
             android:text="@string/sell_product"
              />
@@ -188,6 +195,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_x20"
             android:text="@string/protected_buy"
+            android:textColor="@color/gray"
             android:drawableLeft="@drawable/shield"
             android:drawablePadding="@dimen/margin_x10"
             android:visibility="visible"
@@ -199,6 +207,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_x20"
             android:text="@string/mercado_puntos"
+            android:textColor="@color/gray"
             android:drawableLeft="@drawable/trophy"
             android:drawablePadding="@dimen/margin_x10"
             android:visibility="visible"
@@ -210,6 +219,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_x20"
+            android:textStyle="bold"
             android:text="@string/product_info" />
 
         <androidx.recyclerview.widget.RecyclerView

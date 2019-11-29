@@ -2,7 +2,7 @@
     <string name="app_name">MiliChallenge</string>
     <string name="title_search_in_ml">Buscar en Mercado Libre</string>
     <string name="product_info">Información del producto</string>
-    <string name="price">%1$s %2$s</string>
+    <string name="price">$ %s</string>
     <string name="price_with_strike"><strike>$ %s</strike></string>
     <string name="sale_discount">%s%% OFF</string>
     <string name="free_shipping">Envío gratis</string>
@@ -20,9 +20,9 @@
     <string name="quantity_product_selected">Cantidad: %1$s   (%2$s) </string>
     <string name="last_products">%s disponibles</string>
     <string name="last_product">¡Última disponible!</string>
-    <string name="sell_product">Comprar</string>
-    <string name="protected_buy">Compra protegida</string>
-    <string name="mercado_puntos">Sumás %s Mercados Puntos</string>
+    <string name="sell_product">Comprar ahora</string>
+    <string name="protected_buy">Compra protegida, recibí el producto que esperabas o te devolvemos tu dinero.</string>
+    <string name="mercado_puntos">Sumás %s Mercados Puntos.</string>
     <string name="item_status">2230284</string>
     <string name="no_connection">Parece que no hay internet! \n Intente realizar una nueva busqueda en unos minutos</string>
 </resources>

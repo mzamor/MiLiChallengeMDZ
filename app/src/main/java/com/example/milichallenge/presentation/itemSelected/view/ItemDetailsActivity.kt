@@ -87,7 +87,7 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         tv_real_price_product_detail.visibility =  if(product?.originalPrice!! > 0) View.VISIBLE else View.GONE
         tv_sale_discount_product_detail.visibility = if(product?.originalPrice!! > 0) View.VISIBLE else View.GONE
         var intPartPrice = product?.price?.toInt()
-        tv_price_product_detail.text = String.format(getString(R.string.price), product?.currencyId,
+        tv_price_product_detail.text = String.format(getString(R.string.price),
             if(product?.price!! - intPartPrice!!.toDouble() > 0) product?.price.toString() else intPartPrice.toString())
         tv_sale_discount_product_detail.text = String.format(getString(R.string.sale_discount),
             if(product?.originalPrice!! > 0) percentDiscount(product?.originalPrice!!, product?.price!!) else " ")
@@ -116,7 +116,7 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         var sellerText = String.format(getString(R.string.sold_it_by), result.seller.nickName)
         val ss1 = SpannableString(sellerText)
         ss1.setSpan(RelativeSizeSpan(1.1f), sizeTextSeller, ss1.length, 0)
-        ss1.setSpan(ForegroundColorSpan(Color.BLUE), sizeTextSeller, ss1.length, 0)
+        ss1.setSpan(ForegroundColorSpan(resources.getColor(R.color.light_blue)), sizeTextSeller, ss1.length, 0)
         tv_sold_it_by.text = ss1
     }
 
