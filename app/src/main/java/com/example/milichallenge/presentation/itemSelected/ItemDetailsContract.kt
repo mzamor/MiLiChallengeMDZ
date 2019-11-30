@@ -16,6 +16,6 @@ interface ItemDetailsContract {
         fun dettachView()
         fun isViewAttached(): Boolean
         fun querySellerInfo(site: String, idSeller: String)
-        fun queryProductDescription(site: String, idProduct : String)
+        fun queryProductDescription( idProduct : String)
     }
 }

@@ -1,17 +1,16 @@
 package com.example.milichallenge.presentation.domain.interactor.searchProducts
 
-import com.example.milichallenge.presentation.itemSelected.Model.SellerData
+import com.example.milichallenge.presentation.itemSelected.Model.ProductDescription
 
 interface SearchProductDescriptionInteractor {
-    interface SearchSellerInfoCallback {
-        fun onSearchSellerInfoSuccess(resultSearch: SellerData)
-        fun onSearchSellerInfoFailure(errorMsg: String)
+    interface SearchProductDescriptionCallback {
+        fun onSearchProductDescriptionSuccess(resultSearch: ProductDescription)
+        fun onSearchProductDescriptionFailure(errorMsg: String)
     }
 
-    fun queryProducts(
-        site: String,
-        sellerId: String,
-        listener: SearchSellerInfoCallback
+    fun queryProductsDescription(
+        productId: String,
+        listener: SearchProductDescriptionCallback
     )
 
 }

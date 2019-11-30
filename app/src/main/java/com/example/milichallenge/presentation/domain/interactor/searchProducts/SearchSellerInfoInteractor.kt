@@ -13,5 +13,4 @@ interface SearchSellerInfoInteractor {
         sellerId: String,
         listener: SearchSellerInfoCallback
     )
-
 }

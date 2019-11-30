@@ -1,34 +1,41 @@
 package com.example.milichallenge.presentation.domain.interactor.searchProducts
 
+import com.example.milachallenge.presentation.main.adapter.model.ResultSearch
+import com.example.milichallenge.presentation.itemSelected.Model.ProductDescription
 import com.example.milichallenge.presentation.itemSelected.Model.SellerData
+import com.example.milichallenge.presentation.service.SearchProductDescription
 import com.example.milichallenge.presentation.service.SearchSellerInfo
+import com.example.milichallenge.presentation.service.SearchServices
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class SearchProductDescriptionInteractorImpl : SearchSellerInfoInteractor {
+class SearchProductDescriptionInteractorImpl : SearchProductDescriptionInteractor {
     private val urlBase = "https://api.mercadolibre.com/items/"
-    override fun queryProducts(
-        site: String,
+    override fun queryProductsDescription(
         productId: String,
-        listener: SearchSellerInfoInteractor.SearchSellerInfoCallback
+        listener: SearchProductDescriptionInteractor.SearchProductDescriptionCallback
     ) {
         val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
             .baseUrl(urlBase).build()
-        val service = retrofit.create(SearchSellerInfo::class.java)
-        val call = service.getSearchSellerInfo(site, productId)
-        call.enqueue(object : Callback<SellerData> {
-            override fun onResponse(call: Call<SellerData>, response: Response<SellerData>) {
-                val sellerData: SellerData = response.body()!!
-                listener.onSearchSellerInfoSuccess(sellerData)
+        val service = retrofit.create(SearchProductDescription::class.java)
+        val call =  service.getSearchProductInfo(productId)
+        call.enqueue(object : Callback<ProductDescription> {
+            override fun onResponse(call: Call<ProductDescription>, response: Response<ProductDescription>) {
+                val productDescription: ProductDescription = response.body()!!
+                listener.onSearchProductDescriptionSuccess(productDescription)
             }
-
-            override fun onFailure(call: Call<SellerData>, t: Throwable) {
-                listener.onSearchSellerInfoFailure(call.toString())
+            override fun onFailure(call: Call<ProductDescription>, t: Throwable) {
+                listener.onSearchProductDescriptionFailure(t.message.toString())
             }
         })
+
+
     }
+
+
+
 
 }

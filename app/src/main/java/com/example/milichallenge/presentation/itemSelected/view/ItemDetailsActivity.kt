@@ -1,6 +1,5 @@
 package com.example.milachallenge.presentation.itemSelected
 
-import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -22,15 +21,11 @@ import kotlinx.android.synthetic.main.activity_item_details.*
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.text.SpannableString
-import android.graphics.Color
 import android.graphics.Paint
-import android.os.Build
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.milichallenge.presentation.domain.interactor.searchProducts.SearchProductDescriptionInteractorImpl
 import com.example.milichallenge.presentation.itemSelected.Model.ProductDescription
-import kotlinx.android.synthetic.main.item_product_list.view.*
-
 
 class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailView {
     private lateinit var itemDetailsPresenter: ItemDetailsPresenter
@@ -50,7 +45,7 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         rvProductInfo = findViewById(R.id.rv_product_info)
         bindDetails()
         itemDetailsPresenter.querySellerInfo(siteQuery, product?.seller?.id!!)
-
+        itemDetailsPresenter.queryProductDescription(product?.id.toString())
         productInfo()
     }
 
@@ -60,7 +55,7 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         val productJson = intent.getStringExtra("PRODUCT")
         val gson = Gson()
         product = gson.fromJson(productJson, Product::class.java)
-        itemDetailsPresenter = ItemDetailsPresenter(SearchSellerInfoInteractorImpl())
+        itemDetailsPresenter = ItemDetailsPresenter(SearchSellerInfoInteractorImpl(), SearchProductDescriptionInteractorImpl())
         itemDetailsPresenter.attachView(this)
         tv_new_products.text =
             if (product?.condition != null && product?.condition.toString() == "new") getText(R.string.new_product) else ""
@@ -145,9 +140,8 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
     }
 
     override fun showProductDescription(result: ProductDescription) {
-        Log.e("description", result.description)
+        tv_product_description.text = result.description
     }
-
 
     override fun showProgressBar() {
         pb_item_details.visibility = View.VISIBLE
@@ -179,9 +173,7 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
     private fun showDialog(){
         array = resources.getStringArray(R.array.string_array_product_quantity)
         builder = AlertDialog.Builder(this)
-
         builder?.setTitle(resources.getString(R.string.choose_product_quantity))
-
         builder?.setItems(array) { _, which ->
             productQuantity = which + 1
             try {
@@ -194,9 +186,6 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         val dialog = builder?.create()
         dialog?.show()
     }
-
-
-
 }
 
 
