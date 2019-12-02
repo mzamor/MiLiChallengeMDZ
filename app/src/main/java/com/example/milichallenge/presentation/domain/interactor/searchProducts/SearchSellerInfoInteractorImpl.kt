@@ -30,5 +30,4 @@ class SearchSellerInfoInteractorImpl : SearchSellerInfoInteractor {
             }
         })
     }
-
 }

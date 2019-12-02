@@ -1,6 +1,7 @@
 package com.example.milachallenge.presentation.main.presenter
 
 import com.example.milachallenge.presentation.main.MainContract
+import com.example.milachallenge.presentation.main.adapter.model.Product
 import com.example.milachallenge.presentation.main.adapter.model.ResultSearch
 import com.example.milichallenge.presentation.domain.interactor.searchProducts.SearchProductInteractor
 
@@ -19,10 +20,10 @@ class MainPresenter(searchProductInteractor: SearchProductInteractor) : MainCont
             productSearch,
             pagingNumber,
             object : SearchProductInteractor.SearchProductsCallback {
-                override fun onSearchProductsSuccess(resultSearch: ResultSearch) {
+                override fun onSearchProductsSuccess(result: List<Product>) {
                     if (isViewAttached()) {
                         view?.hideProgressBar()
-                        view?.showProductList(resultSearch.results.filter { it.buyingMode != "classified" })
+                        view?.showProductList(result)
                     }
                 }
 

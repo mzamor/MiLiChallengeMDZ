@@ -28,8 +28,7 @@
     <string name="product_description">Descripcion</string>
     <string name="no_connection">Parece que no hay internet! \n Intente realizar una nueva busqueda en unos minutos</string>
 
-    <string-array
-        name="string_array_product_quantity">
+    <string-array name="string_array_product_quantity">
         <item>"1 unidad"</item>
         <item>"2 unidades"</item>
         <item>"3 unidades"</item>
@@ -38,5 +37,8 @@
         <item>"6 unidades"</item>
         <item>"Más de 6 unidades"</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

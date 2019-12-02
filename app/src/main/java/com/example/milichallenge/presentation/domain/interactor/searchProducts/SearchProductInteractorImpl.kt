@@ -25,7 +25,7 @@ class SearchProductInteractorImpl : SearchProductInteractor {
         call.enqueue(object : Callback<ResultSearch> {
             override fun onResponse(call: Call<ResultSearch>, response: Response<ResultSearch>) {
                 val resultSearch: ResultSearch = response.body()!!
-                listener.onSearchProductsSuccess(resultSearch)
+                listener.onSearchProductsSuccess(resultSearch.results.filter { it.buyingMode != "classified" })
             }
 
             override fun onFailure(call: Call<ResultSearch>, t: Throwable) {

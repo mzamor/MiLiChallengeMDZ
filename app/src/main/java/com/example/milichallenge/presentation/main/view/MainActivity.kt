@@ -3,6 +3,8 @@ package com.example.milichallenge.presentation.main.view
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.text.InputType
 import android.view.Menu
@@ -139,7 +141,7 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
         svProductsMenu = menu?.findItem(R.id.app_bar_search)?.actionView as SearchView
         svProductsMenu?.inputType = InputType.TYPE_CLASS_TEXT
         svProductsMenu?.onActionViewExpanded()
-        svProductsMenu?.queryHint = "Buscar en Mercado Libre"
+        svProductsMenu?.queryHint = resources.getString(R.string.title_search_in_ml)
         svProductsMenu?.setOnQueryTextListener(this)
         return true
     }
@@ -148,7 +150,6 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
         val manager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = manager.activeNetworkInfo
         if (activeNetwork == null) {
-            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show()
             tv_no_connection.visibility = View.VISIBLE
             isConnected = false
         } else {
@@ -157,7 +158,6 @@ class MainActivity : MainContract.MainView, AppCompatActivity(), SearchView.OnQu
         }
         return isConnected
     }
-
 
     override fun showProgressBar() {
         pb_products.visibility = View.VISIBLE

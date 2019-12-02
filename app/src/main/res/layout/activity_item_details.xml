@@ -242,6 +242,5 @@
             android:layout_height="wrap_content"
             style="@style/TextAppearance.AppCompat"
             />
-
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
