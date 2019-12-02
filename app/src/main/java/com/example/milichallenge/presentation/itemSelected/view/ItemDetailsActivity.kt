@@ -1,16 +1,12 @@
 package com.example.milachallenge.presentation.itemSelected
 
-import android.content.DialogInterface
-import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -31,7 +27,8 @@ import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_item_details.*
 
-class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailView, ProductQuantityDialogFragment.ProductQuantity {
+class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailView,
+    ProductQuantityDialogFragment.ProductQuantity {
     private lateinit var itemDetailsPresenter: ItemDetailsPresenter
     private var product: Product? = null
     var rvProductInfo: RecyclerView? = null
@@ -65,7 +62,9 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
         )
         itemDetailsPresenter.attachView(this)
         tv_new_products.text =
-            if (product?.condition != null && product?.condition.toString() == NEW_PRODUCT) getText(R.string.new_product) else ""
+            if (product?.condition != null && product?.condition.toString() == NEW_PRODUCT) getText(
+                R.string.new_product
+            ) else ""
         tv_new_products.visibility =
             if (tv_new_products.text.isNotEmpty()) View.VISIBLE else View.GONE
         setQuantitySoldProducts()
@@ -209,8 +208,9 @@ class ItemDetailsActivity : AppCompatActivity(), ItemDetailsContract.ItemDetailV
     }
 
     private fun setDialog() {
-       val productQuantityDialogFragment = ProductQuantityDialogFragment(product?.availableQuantity?.toInt())
-        productQuantityDialogFragment.show(supportFragmentManager,"productQuantity")
+        val productQuantityDialogFragment =
+            ProductQuantityDialogFragment(product?.availableQuantity?.toInt())
+        productQuantityDialogFragment.show(supportFragmentManager, "productQuantity")
     }
 
     override fun productQuantitySelected(quantity: Int) {

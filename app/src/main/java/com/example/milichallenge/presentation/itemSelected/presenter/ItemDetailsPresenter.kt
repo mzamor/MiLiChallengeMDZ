@@ -6,8 +6,10 @@ import com.example.milichallenge.presentation.domain.interactor.searchProducts.S
 import com.example.milichallenge.presentation.itemSelected.Model.ProductDescription
 import com.example.milichallenge.presentation.itemSelected.Model.SellerData
 
-class ItemDetailsPresenter(searchSellerInfoInteractor: SearchSellerInfoInteractor,
-                           searchProductDescriptionInteractor: SearchProductDescriptionInteractor) :
+class ItemDetailsPresenter(
+    searchSellerInfoInteractor: SearchSellerInfoInteractor,
+    searchProductDescriptionInteractor: SearchProductDescriptionInteractor
+) :
     ItemDetailsContract.ItemDetailPresenter {
     var view: ItemDetailsContract.ItemDetailView? = null
     var searchSellerInfoInteractor: SearchSellerInfoInteractor? = null
@@ -52,18 +54,20 @@ class ItemDetailsPresenter(searchSellerInfoInteractor: SearchSellerInfoInteracto
 
     override fun queryProductDescription(idProduct: String) {
         view?.showProgressBar()
-        searchProductDescriptionInteractor?.queryProductsDescription(idProduct, object: SearchProductDescriptionInteractor.SearchProductDescriptionCallback{
-            override fun onSearchProductDescriptionSuccess(resultSearch: ProductDescription) {
-                if (isViewAttached()) {
-                    view?.hideProgressBar()
-                    view?.showProductDescription(resultSearch)
+        searchProductDescriptionInteractor?.queryProductsDescription(
+            idProduct,
+            object : SearchProductDescriptionInteractor.SearchProductDescriptionCallback {
+                override fun onSearchProductDescriptionSuccess(resultSearch: ProductDescription) {
+                    if (isViewAttached()) {
+                        view?.hideProgressBar()
+                        view?.showProductDescription(resultSearch)
+                    }
                 }
-            }
 
-            override fun onSearchProductDescriptionFailure(errorMsg: String) {
-            view?.hideProgressBar()
-            }
-        })
+                override fun onSearchProductDescriptionFailure(errorMsg: String) {
+                    view?.hideProgressBar()
+                }
+            })
     }
 
 }

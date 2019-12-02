@@ -84,7 +84,7 @@ class ProductsAdapter(private val context: Context, var listener: ClickListener)
                 )
                 itemView.tv_installments.visibility = VISIBLE
 
-            }else{
+            } else {
                 itemView.tv_installments.visibility = GONE
             }
 

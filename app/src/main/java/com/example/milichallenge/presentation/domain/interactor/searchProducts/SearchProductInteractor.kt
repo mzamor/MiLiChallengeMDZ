@@ -1,7 +1,6 @@
 package com.example.milichallenge.presentation.domain.interactor.searchProducts
 
 import com.example.milachallenge.presentation.main.adapter.model.Product
-import com.example.milachallenge.presentation.main.adapter.model.ResultSearch
 
 interface SearchProductInteractor {
     interface SearchProductsCallback {

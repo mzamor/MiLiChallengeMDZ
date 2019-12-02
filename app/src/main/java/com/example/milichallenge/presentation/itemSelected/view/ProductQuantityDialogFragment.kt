@@ -8,11 +8,13 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.InputType
-import android.widget.*
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.ListView
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.example.milichallenge.R
-import com.example.milichallenge.presentation.main.view.MainActivity
 
 class ProductQuantityDialogFragment(var quantityAvailable: Int?) : DialogFragment() {
 
@@ -20,53 +22,61 @@ class ProductQuantityDialogFragment(var quantityAvailable: Int?) : DialogFragmen
         fun productQuantitySelected(quantity: Int)
     }
 
-    var myContext : Context?  =null
+    var myContext: Context? = null
+    var inputValidated: Boolean = false
+    var valueInserted: Boolean = false
+
     init {
-        myContext=context
+        myContext = context
     }
+
     lateinit var productQuantity: ProductQuantity
     var listView: ListView? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
         val arrayProductQuantity = resources.getStringArray(R.array.string_array_product_quantity)
-
         val alertDialogBuilder = AlertDialog.Builder(context!!)
             .setItems(arrayProductQuantity, DialogInterface.OnClickListener { dialogInterface, i ->
                 if (i + 1 <= quantityAvailable!!) {
                     if (i != 6) {
                         productQuantity.productQuantitySelected(i + 1)
                     } else {
-                        val mBuilder = AlertDialog.Builder(context!!)
-                        val mLayout = LinearLayout(context)
-                        val mTvQuantityProducts = TextView(context)
-                        val mEtQuantityProducts = EditText(context)
-                        mTvQuantityProducts.text = "Elegí cantidad"
-                        mEtQuantityProducts.setSingleLine()
-                        mEtQuantityProducts.hint = "Elegir Cantidad"
-                        mEtQuantityProducts.inputType = InputType.TYPE_CLASS_NUMBER
-                        mLayout.orientation = LinearLayout.VERTICAL
-                        mLayout.addView(mTvQuantityProducts)
-                        mLayout.addView(mEtQuantityProducts)
-                        mLayout.setPadding(50, 40, 50, 10)
-                        mBuilder.setView(mLayout)
-                        mBuilder.setPositiveButton("Confirmar") { dialogInterfaceManual, j ->
-                            val productQuantityValue = mEtQuantityProducts.text.toString().toInt()
-                            if(productQuantityValue <= quantityAvailable!!) {
-                                productQuantity.productQuantitySelected(productQuantityValue)
-                            }else{
-
-                            }
-                        }
-                        mBuilder.create().show()
+                        dialogSetManualProductQuantity()
                     }
                 }
             })
+
         val dialog = alertDialogBuilder.create()
         listView = dialog.listView
         listView?.divider = ColorDrawable(Color.DKGRAY)
         listView?.dividerHeight = 2
         return dialog
+    }
+
+    fun dialogSetManualProductQuantity() {
+        val mBuilder = AlertDialog.Builder(context!!)
+        val mEtQuantityProducts = EditText(context)
+        val mLayout = LinearLayout(context)
+        val mTvQuantityProducts = TextView(context)
+        mTvQuantityProducts.text = resources.getText(R.string.choose_product_quantity_title)
+        mEtQuantityProducts.setSingleLine()
+        mEtQuantityProducts.hint = resources.getText(R.string.choose_product_quantity_hint)
+        mEtQuantityProducts.inputType = InputType.TYPE_CLASS_NUMBER
+        mLayout.orientation = LinearLayout.VERTICAL
+        mLayout.addView(mTvQuantityProducts)
+        mLayout.addView(mEtQuantityProducts)
+        mLayout.setPadding(50, 40, 50, 10)
+        mBuilder.setView(mLayout)
+        mBuilder.setPositiveButton(resources.getText(R.string.confirm_product_quantity)) { dialogInterfaceManual, j ->
+            val productQuantityValue = mEtQuantityProducts.text.toString().toInt()
+            valueInserted = true
+            inputValidated = productQuantityValue <= quantityAvailable!!
+            if (inputValidated) {
+                productQuantity.productQuantitySelected(productQuantityValue)
+            }
+        }
+        mBuilder.create().show()
     }
 
     override fun onAttach(context: Context) {

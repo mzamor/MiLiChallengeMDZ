@@ -27,6 +27,10 @@
     <string name="item_status">2230284</string>
     <string name="product_description">Descripcion</string>
     <string name="no_connection">Parece que no hay internet! \n Intente realizar una nueva busqueda en unos minutos</string>
+    <string name="choose_product_quantity_title">Elegí cantidad</string>
+    <string name="choose_product_quantity_hint">Elegir Cantidad</string>
+    <string name="confirm_product_quantity">Confirmar</string>
+
 
     <string-array name="string_array_product_quantity">
         <item>"1 unidad"</item>

@@ -3,13 +3,10 @@ package com.example.milichallenge.presentation.main.view
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
-import android.net.Network
-import android.net.NetworkInfo
 import android.os.Bundle
 import android.text.InputType
 import android.view.Menu
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration

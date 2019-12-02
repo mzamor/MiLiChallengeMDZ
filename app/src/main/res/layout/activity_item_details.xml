@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -68,8 +67,8 @@
             android:id="@+id/iv_product_detail"
             android:layout_width="@dimen/margin_x150"
             android:layout_height="@dimen/margin_x150"
-            android:layout_margin="@dimen/margin_x10"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/margin_x10" />
 
         <TextView
             android:id="@+id/tv_real_price_product_detail"
@@ -80,25 +79,26 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="@dimen/margin_x10">
-        <TextView
-            android:id="@+id/tv_price_product_detail"
-            style="@style/productPriceDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-           />
+            android:layout_marginBottom="@dimen/margin_x10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_price_product_detail"
+                style="@style/productPriceDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/tv_sale_discount_product_detail"
                 style="@style/freeShippingList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_x10"
                 android:layout_gravity="center_vertical"
-                android:visibility="gone"/>
+                android:layout_marginLeft="@dimen/margin_x10"
+                android:visibility="gone" />
 
         </LinearLayout>
+
         <TextView
             android:id="@+id/tv_has_stock_product_detail"
             style="@style/hasStockDetail"
@@ -106,19 +106,18 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_x20"
             android:text="@string/has_stock"
-            android:visibility="visible"/>
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/tv_payment_way_product_detail"
             style="@style/TextAppearance.AppCompat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_x20"
             android:drawableLeft="@drawable/payment"
             android:drawablePadding="@dimen/margin_x10"
-            android:layout_marginBottom="@dimen/margin_x20"
             android:textSize="@dimen/title_product_details"
-            android:visibility="visible"
-            />
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/tv_shipping_way_product_detail"
@@ -126,13 +125,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_x20"
-            android:text="@string/shipping_way"
             android:drawableLeft="@drawable/shipping"
             android:drawablePadding="@dimen/margin_x10"
+            android:text="@string/shipping_way"
             android:textColor="@color/green"
             android:textSize="@dimen/title_product_details"
-            android:visibility="visible"
-            />
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/tv_take_away_product_detail"
@@ -140,9 +138,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_x20"
-            android:text="@string/take_away"
             android:drawableLeft="@drawable/store"
             android:drawablePadding="@dimen/margin_x10"
+            android:text="@string/take_away"
             android:textColor="@color/green"
             android:textSize="@dimen/title_product_details"
             android:visibility="visible" />
@@ -152,7 +150,7 @@
             android:layout_width="@dimen/margin_x50"
             android:layout_height="@dimen/margin_x50"
             android:layout_gravity="center"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_sold_it_by"
@@ -161,31 +159,29 @@
             android:layout_marginBottom="@dimen/margin_x20"
             android:textColor="@color/black"
             android:textSize="@dimen/title_product_details"
-            android:visibility="visible"/>
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/bt_quantity_products"
+            style="@style/button_grey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/button_grey"
             android:layout_marginBottom="@dimen/margin_x20"
+            android:padding="@dimen/margin_x10"
             android:text="@string/quantity_product_selected"
             android:textAlignment="textStart"
             android:textAllCaps="false"
-            android:textSize="@dimen/title_product_details"
-            android:padding="@dimen/margin_x10"
-           />
+            android:textSize="@dimen/title_product_details" />
 
         <Button
             android:id="@+id/bt_sell_product"
+            style="@style/button_blue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/button_blue"
-            android:textAllCaps="false"
-            android:textSize="@dimen/product_buy"
             android:layout_marginBottom="@dimen/margin_x30"
             android:text="@string/sell_product"
-             />
+            android:textAllCaps="false"
+            android:textSize="@dimen/product_buy" />
 
         <TextView
             android:id="@+id/tv_protected_buy_product_detail"
@@ -193,24 +189,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_x20"
-            android:text="@string/protected_buy"
-            android:textColor="@color/gray"
             android:drawableLeft="@drawable/shield"
             android:drawablePadding="@dimen/margin_x10"
-            android:visibility="visible"
-            />
+            android:text="@string/protected_buy"
+            android:textColor="@color/gray"
+            android:visibility="visible" />
+
         <TextView
             android:id="@+id/tv_mercado_puntos_product_detail"
             style="@style/TextAppearance.AppCompat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_x20"
-            android:text="@string/mercado_puntos"
-            android:textColor="@color/gray"
             android:drawableLeft="@drawable/trophy"
             android:drawablePadding="@dimen/margin_x10"
-            android:visibility="visible"
-            />
+            android:text="@string/mercado_puntos"
+            android:textColor="@color/gray"
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/tv_title_product_info"
@@ -218,8 +213,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_x20"
-            android:textStyle="bold"
-            android:text="@string/product_info" />
+            android:text="@string/product_info"
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_product_info"
@@ -229,18 +224,17 @@
             android:layout_marginBottom="@dimen/margin_x30" />
 
         <TextView
+            style="@style/productTitleList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/productTitleList"
-            android:textStyle="bold"
             android:layout_marginBottom="@dimen/margin_x10"
-            android:text="@string/product_description"/>
+            android:text="@string/product_description"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_product_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             style="@style/TextAppearance.AppCompat"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

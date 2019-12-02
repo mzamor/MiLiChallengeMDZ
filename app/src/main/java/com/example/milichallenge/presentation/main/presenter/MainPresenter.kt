@@ -2,7 +2,6 @@ package com.example.milachallenge.presentation.main.presenter
 
 import com.example.milachallenge.presentation.main.MainContract
 import com.example.milachallenge.presentation.main.adapter.model.Product
-import com.example.milachallenge.presentation.main.adapter.model.ResultSearch
 import com.example.milichallenge.presentation.domain.interactor.searchProducts.SearchProductInteractor
 
 class MainPresenter(searchProductInteractor: SearchProductInteractor) : MainContract.MainPresenter {
